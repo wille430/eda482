@@ -1,0 +1,47 @@
+
+ex1-6.elf:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+20000000 <main>:
+
+main:
+@ R0=j, R1=cvec2[j]
+	LDR	R0,#j
+20000000:	4804      	ldr	r0, [pc, #16]	; (20000014 <j>)
+	LDR	R0,[R0]
+20000002:	6800      	ldr	r0, [r0, #0]
+	LDRB	R1,#cvec2
+20000004:	4984      	ldr	r1, [pc, #528]	; (20000218 <cvec2>)
+	LDR	R0,[R1,R0]
+20000006:	5808      	ldr	r0, [r1, r0]
+	LDR	R1,#i
+20000008:	4901      	ldr	r1, [pc, #4]	; (20000010 <i>)
+	LDR	R1,[R1]
+2000000a:	6809      	ldr	r1, [r1, #0]
+	LDR	R2,#cvec1
+2000000c:	4a02      	ldr	r2, [pc, #8]	; (20000018 <cvec1>)
+	STRB	R0,[R2,R1]
+2000000e:	5450      	strb	r0, [r2, r1]
+
+20000010 <i>:
+20000010:	00000000 	.word	0x00000000
+
+20000014 <j>:
+20000014:	00000000 	.word	0x00000000
+
+20000018 <cvec1>:
+	...
+
+20000218 <cvec2>:
+	...
+
+20000618 <__bss_end__>:
+	...
+
+20001000 <heap_low>:
+	...
+
+20001800 <heap_top>:
+	...

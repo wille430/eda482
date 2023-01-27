@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeLite_Workspace Name="eda482" Database="" Version="10000">
+  <Project Name="intro" Path="intro/intro.project" Active="No"/>
+  <Project Name="test" Path="test/test.project" Active="No"/>
+  <Project Name="keyb" Path="keyb/keyb.project" Active="Yes"/>
+  <BuildMatrix>
+    <WorkspaceConfiguration Name="Debug">
+      <Environment/>
+      <Project Name="intro" ConfigName="Debug"/>
+      <Project Name="introduction" ConfigName="Debug"/>
+      <Project Name="intro" ConfigName="Debug"/>
+      <Project Name="test" ConfigName="Debug"/>
+      <Project Name="keyb" ConfigName="Debug"/>
+    </WorkspaceConfiguration>
+    <WorkspaceConfiguration Name="Release">
+      <Environment/>
+      <Project Name="intro" ConfigName="Release"/>
+      <Project Name="introduction" ConfigName="Release"/>
+      <Project Name="intro" ConfigName="Release"/>
+      <Project Name="test" ConfigName="Release"/>
+      <Project Name="keyb" ConfigName="Release"/>
+    </WorkspaceConfiguration>
+  </BuildMatrix>
+</CodeLite_Workspace>

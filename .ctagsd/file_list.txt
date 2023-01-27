@@ -1,0 +1,5 @@
+/home/william/Documents/eda482/keyb/md407-ram.x
+/home/william/Documents/eda482/keyb/startup.c
+/home/william/Documents/eda482/test/main.c
+/home/william/Documents/eda482/intro/md407-ram.x
+/home/william/Documents/eda482/intro/startup.c

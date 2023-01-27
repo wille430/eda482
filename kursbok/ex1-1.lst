@@ -1,0 +1,30 @@
+
+ex1-1.elf:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+20000000 <start>:
+
+
+start:	LDR	R1,=i
+20000000:	4904      	ldr	r1, [pc, #16]	; (20000014 <s+0x4>)
+	LDR	R2,=s
+20000002:	4a05      	ldr	r2, [pc, #20]	; (20000018 <s+0x8>)
+	LDR	R0,[R1]
+20000004:	6808      	ldr	r0, [r1, #0]
+	STRH	R0,[R2]
+20000006:	8010      	strh	r0, [r2, #0]
+	B	start
+20000008:	e7fa      	b.n	20000000 <start>
+2000000a:	46c0      	nop			; (mov r8, r8)
+
+2000000c <i>:
+2000000c:	00000000 	.word	0x00000000
+
+20000010 <s>:
+20000010:	00000000 	.word	0x00000000
+start:	LDR	R1,=i
+20000014:	2000000c 	.word	0x2000000c
+	LDR	R2,=s
+20000018:	20000010 	.word	0x20000010
