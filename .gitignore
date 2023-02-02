@@ -54,4 +54,4 @@ dkms.conf
 # ASM
 *.s19
 *.lst
-Debug/*
+./**/*/Debug/*
