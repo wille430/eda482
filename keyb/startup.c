@@ -17,7 +17,9 @@ __asm__ volatile(".L1: B .L1\n");				/* never return */
 
 unsigned char * GPIO_ODR_HIGH = 0x40020c15;
 unsigned char * GPIO_IDR_HIGH = 0x40020c11;
-volatile unsigned short * GPIO_MODER = 0x40020c02;
+volatile unsigned int * GPIO_MODER = 0x40020c00;
+volatile unsigned short * GPIO_OTYPER = 0x40020c04;
+volatile unsigned int * GPIO_PUPDR = 0x40020c0c;
 
 void kbdActivate(unsigned int row)
 {
@@ -62,7 +64,14 @@ char keyb(void)
 
 void init(void)
 {
-    * GPIO_MODER |= 0x5555;
+    // Uppgift 2.1
+    * GPIO_MODER &= 0x0000FFFF;
+    * GPIO_MODER |= 0x55000000;
+    
+    * GPIO_OTYPER &= 0x00FF;
+    
+    * GPIO_PUPDR &= 0x0000FFFF;
+    * GPIO_PUPDR |= 0x00AA0000;
 }
 
 void main(void)

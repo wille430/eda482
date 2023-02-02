@@ -3,18 +3,18 @@
 ## any manual changes will be erased      
 ##
 ## Debug
-ProjectName            :=keyb
+ProjectName            :=asciidisplay
 ConfigurationName      :=Debug
 WorkspaceConfiguration :=Debug
 WorkspacePath          :=/home/william/Documents/eda482
-ProjectPath            :=/home/william/Documents/eda482/keyb
+ProjectPath            :=/home/william/Documents/eda482/asciidisplay
 IntermediateDirectory  :=$(ConfigurationName)
 OutDir                 := $(IntermediateDirectory)
 CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=William
-Date                   :=01/31/2023
+Date                   :=02/01/2023
 CodeLitePath           :=/home/william/.codelite
 LinkerName             :=/usr/share/codelite/tools/gcc-arm/bin/arm-none-eabi-g++
 SharedObjectLinkerName :=/usr/share/codelite/tools/gcc-arm/bin/arm-none-eabi-g++ -shared -fPIC
@@ -30,11 +30,11 @@ PreprocessorSwitch     :=-D
 SourceSwitch           :=-c 
 OutputDirectory        :=$(IntermediateDirectory)
 OutputFile             :=$(IntermediateDirectory)/$(ProjectName)
-Preprocessors          :=
+Preprocessors          :=$(PreprocessorSwitch)SIMULATOR 
 ObjectSwitch           :=-o 
 ArchiveOutputSwitch    := 
 PreprocessOnlySwitch   :=-E
-ObjectsFileList        :="keyb.txt"
+ObjectsFileList        :="asciidisplay.txt"
 PCHCompileFlags        :=
 MakeDirCommand         :=mkdir -p
 LinkOptions            :=  -T$(ProjectPath)/md407-ram.x -L$(ARM_V6LIB) -L$(ARM_GCC_V6LIB) -nostdlib -nostartfiles
@@ -88,8 +88,8 @@ $(OutputFile): $(IntermediateDirectory)/.d $(Objects)
 
 PostBuild:
 	@echo Executing Post Build commands ...
-	/usr/share/codelite/tools/gcc-arm/bin/arm-none-eabi-objcopy -S -O srec  Debug/keyb Debug/keyb.s19
-	/usr/share/codelite/tools/gcc-arm/bin/arm-none-eabi-objdump -D -S Debug/keyb > Debug/keyb.lst
+	/usr/share/codelite/tools/gcc-arm/bin/arm-none-eabi-objcopy -S -O srec  Debug/asciidisplay Debug/asciidisplay.s19
+	/usr/share/codelite/tools/gcc-arm/bin/arm-none-eabi-objdump -D -S Debug/asciidisplay > Debug/asciidisplay.lst
 	@echo Done
 
 MakeIntermediateDirs:
@@ -107,7 +107,7 @@ PreBuild:
 ##
 $(IntermediateDirectory)/startup.c$(ObjectSuffix): startup.c
 	@$(CC) $(CFLAGS) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/startup.c$(ObjectSuffix) -MF$(IntermediateDirectory)/startup.c$(DependSuffix) -MM startup.c
-	$(CC) $(SourceSwitch) "/home/william/Documents/eda482/keyb/startup.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/startup.c$(ObjectSuffix) $(IncludePath)
+	$(CC) $(SourceSwitch) "/home/william/Documents/eda482/asciidisplay/startup.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/startup.c$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/startup.c$(PreprocessSuffix): startup.c
 	$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/startup.c$(PreprocessSuffix) startup.c
 

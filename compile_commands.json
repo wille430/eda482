@@ -1,4 +1,12 @@
 [{
+  "file": "/home/william/Documents/eda482/asciidisplay/startup.c",
+  "directory": "/home/william/Documents/eda482/asciidisplay",
+  "command": "/usr/share/codelite/tools/gcc-arm/bin/arm-none-eabi-gcc -c /home/william/Documents/eda482/asciidisplay/startup.c -o /home/william/Documents/eda482/asciidisplay/startup.c.o -target arm-none-eabi -I/usr/share/codelite/tools/gcc-arm/arm-none-eabi/include/c++/9.2.1 -I/usr/share/codelite/tools/gcc-arm/arm-none-eabi/include/c++/9.2.1/arm-none-eabi -I/usr/share/codelite/tools/gcc-arm/arm-none-eabi/include/c++/9.2.1/backward -I/usr/share/codelite/tools/gcc-arm/lib/gcc/arm-none-eabi/9.2.1/include -I/usr/share/codelite/tools/gcc-arm/lib/gcc/arm-none-eabi/9.2.1/include-fixed -I/usr/share/codelite/tools/gcc-arm/arm-none-eabi/include -DSIMULATOR -I. -I.  -g  -O0  -w  -mthumb -march=armv6-m  -mfloat-abi=soft  -std=c99"
+ }, {
+  "file": "/home/william/Documents/eda482/keypad/startup.c",
+  "directory": "/home/william/Documents/eda482/keypad",
+  "command": "/usr/share/codelite/tools/gcc-arm/bin/arm-none-eabi-gcc -c /home/william/Documents/eda482/keypad/startup.c -o /home/william/Documents/eda482/keypad/startup.c.o -target arm-none-eabi -I/usr/share/codelite/tools/gcc-arm/arm-none-eabi/include/c++/9.2.1 -I/usr/share/codelite/tools/gcc-arm/arm-none-eabi/include/c++/9.2.1/arm-none-eabi -I/usr/share/codelite/tools/gcc-arm/arm-none-eabi/include/c++/9.2.1/backward -I/usr/share/codelite/tools/gcc-arm/lib/gcc/arm-none-eabi/9.2.1/include -I/usr/share/codelite/tools/gcc-arm/lib/gcc/arm-none-eabi/9.2.1/include-fixed -I/usr/share/codelite/tools/gcc-arm/arm-none-eabi/include -I. -I.  -g  -O0  -w  -mthumb -march=armv6-m  -mfloat-abi=soft  -std=c99"
+ }, {
   "file": "/home/william/Documents/eda482/keyb/startup.c",
   "directory": "/home/william/Documents/eda482/keyb",
   "command": "/usr/share/codelite/tools/gcc-arm/bin/arm-none-eabi-gcc -c /home/william/Documents/eda482/keyb/startup.c -o /home/william/Documents/eda482/keyb/startup.c.o -target arm-none-eabi -I/usr/share/codelite/tools/gcc-arm/arm-none-eabi/include/c++/9.2.1 -I/usr/share/codelite/tools/gcc-arm/arm-none-eabi/include/c++/9.2.1/arm-none-eabi -I/usr/share/codelite/tools/gcc-arm/arm-none-eabi/include/c++/9.2.1/backward -I/usr/share/codelite/tools/gcc-arm/lib/gcc/arm-none-eabi/9.2.1/include -I/usr/share/codelite/tools/gcc-arm/lib/gcc/arm-none-eabi/9.2.1/include-fixed -I/usr/share/codelite/tools/gcc-arm/arm-none-eabi/include -I. -I.  -g  -O0  -w  -mthumb -march=armv6-m  -mfloat-abi=soft  -std=c99"
