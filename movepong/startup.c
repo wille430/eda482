@@ -2,9 +2,10 @@
  * 	startup.c
  *
  */
-#define STK_CTRL ((volatile unsigned int *) 0xE000E010)
-#define STK_LOAD ((volatile unsigned int *) STK_CTRL+4)
-#define STK_VAL ((volatile unsigned int *) STK_CTRL+8)
+#define STK_BASE 0xE000E010
+#define STK_CTRL ((volatile unsigned int *) STK_BASE)
+#define STK_LOAD ((volatile unsigned int *) (STK_BASE+4))
+#define STK_VAL ((volatile unsigned int *) (STK_BASE+8))
 
 #define SCREEN_WIDTH    128
 #define SCREEN_HEIGHT   64
@@ -82,8 +83,12 @@ void delay_milli(unsigned int ms) {
     ms /= 1000;
     ms++;
 #endif
-    
-    delay_micro(ms * 1000);
+
+    while (ms > 0)
+    {
+        delay_micro(1000);
+        ms--;
+    }
 }
 
 typedef struct
@@ -298,7 +303,7 @@ void draw_object(POBJECT obj)
     for (int i = 0; i < obj->geo->numpoints; i++)
     {
         POINT p = obj->geo->px[i];
-        graphic_pixel_set(p.x, p.y);
+        graphic_pixel_set(p.x+obj->posx, p.y+obj->posy);
     }
 }
 
@@ -307,7 +312,7 @@ void clear_object(POBJECT obj)
     for (int i = 0; i < obj->geo->numpoints; i++)
     {
         POINT p = obj->geo->px[i];
-        graphic_pixel_clear(p.x, p.y);
+        graphic_pixel_clear(p.x+obj->posx, p.y+obj->posy);
     }
 }
 
@@ -384,44 +389,92 @@ static OBJECT ballobject =
     set_object_speed
 };
 
+// keypad
+#define GPIO_BASE 0x40020C00
+#define GPIO_ODR_HIGH ((unsigned char *) (GPIO_BASE+0x15))
+#define GPIO_ODR_LOW ((unsigned char *) (GPIO_BASE+0x14))
+#define GPIO_IDR_HIGH ((unsigned char *) (GPIO_BASE+0x11))
+#define GPIO_MODER ((unsigned int *) GPIO_BASE)
+#define GPIO_OTYPER ((unsigned short *) (GPIO_BASE+0x04))
+#define GPIO_PUPDR ((unsigned int *) (GPIO_BASE+0x0C))
+
+void app_init(void)
+{
+    // Configure keypad D8-15
+    * GPIO_OTYPER &= 0x00FF;
+    
+    * GPIO_PUPDR &= 0x0000FFFF;
+    * GPIO_PUPDR |= 0x00AA0000;
+    
+    * GPIO_MODER &= 0x0000FFFF;
+    * GPIO_MODER |= 0x55000000;
+    
+    // Configure hex display D0-7
+    * GPIO_MODER &= 0xFFFF0000;
+    * GPIO_MODER |= 0x00005555;
+}
+
+unsigned int ReadColumn()
+{
+    char c = * GPIO_IDR_HIGH;
+    if (c & 1) return 1;
+    if (c & 2) return 2;
+    if (c & 4) return 3;
+    if (c & 8) return 4;
+    
+    return 0;
+}
+
+void ActivateRow(int row)
+{
+    switch (row)
+    {
+        case 1: * GPIO_ODR_HIGH = 0x10; break;
+        case 2: * GPIO_ODR_HIGH = 0x20; break;
+        case 3: * GPIO_ODR_HIGH = 0x40; break;
+        case 4: * GPIO_ODR_HIGH = 0x80; break;
+        default: * GPIO_ODR_HIGH = 0x00;
+    }
+}
+
+unsigned char keyb(void)
+{
+    char keys[] = { 1, 2, 3, 0xa, 4, 5, 6, 0xb, 7, 8, 9, 0xc, 0xe, 0, 0xf, 0xd };
+    int row, col;
+    for (row = 1; row <= 4; row++)
+    {
+        ActivateRow(row);
+        if (col = ReadColumn())
+        {
+            ActivateRow(0);
+            return keys[(row - 1) * 4 + (col - 1)];
+        }
+    }
+    
+    return 0xFF;
+}
+
+#define SIMULATOR
 void main(void)
 {
+    char c;
+    POBJECT p = &ballobject;
+    app_init();
     graphic_initialize();
     graphic_clear_screen();
     
-    // ex 3.12
-    /*
-    while (1)
+    while(1)
     {
-        for (int i = 0; i < sizeof(lines)/sizeof(LINE); i++)
+        p->move(p);
+        delay_micro(100);
+        c = keyb();
+        switch(c)
         {
-            draw_line(&lines[i]);
-            delay_milli(500);
+            case 6: p->set_speed(p, 3, 0); break;
+            case 4: p->set_speed(p, -3, 0); break;
+            case 5: p->set_speed(p, 0, 0); break;
+            case 2: p->set_speed(p, 0, -3); break;
+            case 8: p->set_speed(p, 0, 3); break;
         }
-        graphic_clear_screen();
     }
-    */
-    
-    // ex 3.13
-    /*
-    while (1)
-    {
-        for (int i = 0; i < sizeof(rectangles)/sizeof(RECT); i++)
-        {
-            draw_rect(&rectangles[i]);
-            delay_milli(500);
-        }
-        graphic_clear_screen();
-    }
-    */
-    
-    // ex3.14
-    /*
-    while (1)
-    {
-        draw_polygon(&pg1);
-        delay_milli(500);
-        graphic_clear_screen();
-    }
-    */
 }

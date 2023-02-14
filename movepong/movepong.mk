@@ -3,19 +3,20 @@
 ## any manual changes will be erased      
 ##
 ## Debug
-ProjectName            :=keypad
+ProjectName            :=movepong
 ConfigurationName      :=Debug
 WorkspaceConfiguration :=Debug
 WorkspacePath          :=/home/william/Documents/eda482
-ProjectPath            :=/home/william/Documents/eda482/keypad
-IntermediateDirectory  :=$(ConfigurationName)
-OutDir                 := $(IntermediateDirectory)
+ProjectPath            :=/home/william/Documents/eda482/movepong
+IntermediateDirectory  :=../build-$(WorkspaceConfiguration)/movepong
+OutDir                 :=$(IntermediateDirectory)
 CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=William
 Date                   :=02/14/2023
 CodeLitePath           :=/home/william/.codelite
+MakeDirCommand         :=mkdir -p
 LinkerName             :=/usr/share/codelite/tools/gcc-arm/bin/arm-none-eabi-g++
 SharedObjectLinkerName :=/usr/share/codelite/tools/gcc-arm/bin/arm-none-eabi-g++ -shared -fPIC
 ObjectSuffix           :=.o
@@ -28,15 +29,14 @@ OutputSwitch           :=-o
 LibraryPathSwitch      :=-L
 PreprocessorSwitch     :=-D
 SourceSwitch           :=-c 
-OutputDirectory        :=$(IntermediateDirectory)
-OutputFile             :=$(IntermediateDirectory)/$(ProjectName)
-Preprocessors          :=
+OutputDirectory        :=/home/william/Documents/eda482/build-$(WorkspaceConfiguration)/bin
+OutputFile             :=../build-$(WorkspaceConfiguration)/bin/$(ProjectName)
+Preprocessors          :=$(PreprocessorSwitch)SIMULATOR 
 ObjectSwitch           :=-o 
 ArchiveOutputSwitch    := 
 PreprocessOnlySwitch   :=-E
-ObjectsFileList        :="keypad.txt"
+ObjectsFileList        :=$(IntermediateDirectory)/ObjectsList.txt
 PCHCompileFlags        :=
-MakeDirCommand         :=mkdir -p
 LinkOptions            :=  -T$(ProjectPath)/md407-ram.x -L$(ARM_V6LIB) -L$(ARM_GCC_V6LIB) -nostdlib -nostartfiles
 IncludePath            :=  $(IncludeSwitch). $(IncludeSwitch). 
 IncludePCH             := 
@@ -78,26 +78,26 @@ Objects=$(Objects0)
 ## Main Build Targets 
 ##
 .PHONY: all clean PreBuild PrePreBuild PostBuild MakeIntermediateDirs
-all: $(OutputFile)
+all: MakeIntermediateDirs $(OutputFile)
 
 $(OutputFile): $(IntermediateDirectory)/.d $(Objects) 
-	@$(MakeDirCommand) $(@D)
+	@$(MakeDirCommand) "$(IntermediateDirectory)"
 	@echo "" > $(IntermediateDirectory)/.d
 	@echo $(Objects0)  > $(ObjectsFileList)
 	$(LinkerName) $(OutputSwitch)$(OutputFile) @$(ObjectsFileList) $(LibPath) $(Libs) $(LinkOptions)
 
 PostBuild:
 	@echo Executing Post Build commands ...
-	/usr/share/codelite/tools/gcc-arm/bin/arm-none-eabi-objcopy -S -O srec  Debug/keypad Debug/keypad.s19
-	/usr/share/codelite/tools/gcc-arm/bin/arm-none-eabi-objdump -D -S Debug/keypad > Debug/keypad.lst
+	$(CodeLiteDir)/tools/gcc-arm/bin/arm-none-eabi-objcopy -S -O srec  $(IntermediateDirectory)/$(ProjectName) $(IntermediateDirectory)/$(ProjectName).s19
+	$(CodeLiteDir)/tools/gcc-arm/bin/arm-none-eabi-objdump -D -S $(IntermediateDirectory)/$(ProjectName) > $(IntermediateDirectory)/$(ProjectName).lst
 	@echo Done
 
 MakeIntermediateDirs:
-	@test -d $(ConfigurationName) || $(MakeDirCommand) $(ConfigurationName)
-
+	@$(MakeDirCommand) "$(IntermediateDirectory)"
+	@$(MakeDirCommand) "$(OutputDirectory)"
 
 $(IntermediateDirectory)/.d:
-	@test -d $(ConfigurationName) || $(MakeDirCommand) $(ConfigurationName)
+	@$(MakeDirCommand) "$(IntermediateDirectory)"
 
 PreBuild:
 
@@ -105,9 +105,11 @@ PreBuild:
 ##
 ## Objects
 ##
-$(IntermediateDirectory)/startup.c$(ObjectSuffix): startup.c
+$(IntermediateDirectory)/startup.c$(ObjectSuffix): startup.c $(IntermediateDirectory)/startup.c$(DependSuffix)
+	$(CC) $(SourceSwitch) "/home/william/Documents/eda482/movepong/startup.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/startup.c$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/startup.c$(DependSuffix): startup.c
 	@$(CC) $(CFLAGS) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/startup.c$(ObjectSuffix) -MF$(IntermediateDirectory)/startup.c$(DependSuffix) -MM startup.c
-	$(CC) $(SourceSwitch) "/home/william/Documents/eda482/keypad/startup.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/startup.c$(ObjectSuffix) $(IncludePath)
+
 $(IntermediateDirectory)/startup.c$(PreprocessSuffix): startup.c
 	$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/startup.c$(PreprocessSuffix) startup.c
 
@@ -117,6 +119,6 @@ $(IntermediateDirectory)/startup.c$(PreprocessSuffix): startup.c
 ## Clean
 ##
 clean:
-	$(RM) -r $(ConfigurationName)/
+	$(RM) -r $(IntermediateDirectory)
 
 
