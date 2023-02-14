@@ -58,3 +58,7 @@ Debug/
 
 .cache/
 .ctagsd/
+
+.codelite/
+
+./Makefile
