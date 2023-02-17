@@ -6,10 +6,12 @@
   <Project Name="keypad" Path="keypad/keypad.project" Active="No"/>
   <Project Name="asciidisplay" Path="asciidisplay/asciidisplay.project" Active="No"/>
   <Project Name="graphicdisplay" Path="graphicdisplay/graphicdisplay.project" Active="No"/>
-  <Project Name="movepong" Path="movepong/movepong.project" Active="Yes"/>
-  <Project Name="asciidisplay" Path="asciidisplay/asciidisplay.project" Active="Yes"/>
+  <Project Name="movepong" Path="movepong/movepong.project" Active="No"/>
+  <Project Name="asciidisplay" Path="asciidisplay/asciidisplay.project" Active="No"/>
   <Project Name="graphicdisplay" Path="graphicdisplay/graphicdisplay.project" Active="No"/>
   <Project Name="delay" Path="delay/delay.project" Active="No"/>
+  <Project Name="singlepong" Path="singlepong/singlepong.project" Active="No"/>
+  <Project Name="spindeljakt" Path="spindeljakt/spindeljakt.project" Active="Yes"/>
   <BuildMatrix>
     <WorkspaceConfiguration Name="Debug">
       <Environment/>
@@ -23,6 +25,8 @@
       <Project Name="graphicdisplay" ConfigName="Debug"/>
       <Project Name="movepong" ConfigName="Debug"/>
       <Project Name="delay" ConfigName="Debug"/>
+      <Project Name="singlepong" ConfigName="Debug"/>
+      <Project Name="spindeljakt" ConfigName="Debug"/>
     </WorkspaceConfiguration>
     <WorkspaceConfiguration Name="Release">
       <Environment/>
@@ -36,6 +40,8 @@
       <Project Name="graphicdisplay" ConfigName="Release"/>
       <Project Name="movepong" ConfigName="Release"/>
       <Project Name="delay" ConfigName="Release"/>
+      <Project Name="singlepong" ConfigName="Release"/>
+      <Project Name="spindeljakt" ConfigName="Release"/>
     </WorkspaceConfiguration>
   </BuildMatrix>
 </CodeLite_Workspace>
