@@ -13,7 +13,8 @@
   <Project Name="singlepong" Path="singlepong/singlepong.project" Active="No"/>
   <Project Name="spindeljakt" Path="spindeljakt/spindeljakt.project" Active="No"/>
   <Project Name="getsetpsr" Path="getsetpsr/getsetpsr.project" Active="No"/>
-  <Project Name="systick_irq" Path="systick_irq/systick_irq.project" Active="Yes"/>
+  <Project Name="systick_irq" Path="systick_irq/systick_irq.project" Active="No"/>
+  <Project Name="random_number" Path="random_number/random_number.project" Active="Yes"/>
   <BuildMatrix>
     <WorkspaceConfiguration Name="Debug">
       <Environment/>
@@ -31,6 +32,7 @@
       <Project Name="spindeljakt" ConfigName="Debug"/>
       <Project Name="getsetpsr" ConfigName="Debug"/>
       <Project Name="systick_irq" ConfigName="Debug"/>
+      <Project Name="random_number" ConfigName="Debug"/>
     </WorkspaceConfiguration>
     <WorkspaceConfiguration Name="Release">
       <Environment/>
@@ -48,6 +50,7 @@
       <Project Name="spindeljakt" ConfigName="Release"/>
       <Project Name="getsetpsr" ConfigName="Release"/>
       <Project Name="systick_irq" ConfigName="Release"/>
+      <Project Name="random_number" ConfigName="Release"/>
     </WorkspaceConfiguration>
   </BuildMatrix>
 </CodeLite_Workspace>

@@ -3,12 +3,12 @@
 ## any manual changes will be erased      
 ##
 ## Debug
-ProjectName            :=spindeljakt
+ProjectName            :=random_number
 ConfigurationName      :=Debug
 WorkspaceConfiguration :=Debug
 WorkspacePath          :=/home/william/Documents/eda482
-ProjectPath            :=/home/william/Documents/eda482/spindeljakt
-IntermediateDirectory  :=../build-$(WorkspaceConfiguration)/spindeljakt
+ProjectPath            :=/home/william/Documents/eda482/random_number
+IntermediateDirectory  :=../build-$(WorkspaceConfiguration)/random_number
 OutDir                 :=$(IntermediateDirectory)
 CurrentFileName        :=
 CurrentFilePath        :=
@@ -31,7 +31,7 @@ PreprocessorSwitch     :=-D
 SourceSwitch           :=-c 
 OutputDirectory        :=/home/william/Documents/eda482/build-$(WorkspaceConfiguration)/bin
 OutputFile             :=../build-$(WorkspaceConfiguration)/bin/$(ProjectName)
-Preprocessors          :=$(PreprocessorSwitch)SIMULATOR 
+Preprocessors          :=
 ObjectSwitch           :=-o 
 ArchiveOutputSwitch    := 
 PreprocessOnlySwitch   :=-E
@@ -106,7 +106,7 @@ PreBuild:
 ## Objects
 ##
 $(IntermediateDirectory)/startup.c$(ObjectSuffix): startup.c $(IntermediateDirectory)/startup.c$(DependSuffix)
-	$(CC) $(SourceSwitch) "/home/william/Documents/eda482/spindeljakt/startup.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/startup.c$(ObjectSuffix) $(IncludePath)
+	$(CC) $(SourceSwitch) "/home/william/Documents/eda482/random_number/startup.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/startup.c$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/startup.c$(DependSuffix): startup.c
 	@$(CC) $(CFLAGS) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/startup.c$(ObjectSuffix) -MF$(IntermediateDirectory)/startup.c$(DependSuffix) -MM startup.c
 

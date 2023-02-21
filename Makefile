@@ -1,8 +1,8 @@
 .PHONY: clean All
 
 All:
-	@echo "----------Building project:[ systick_irq - Debug ]----------"
-	@cd "systick_irq" && "$(MAKE)" -f  "systick_irq.mk" && "$(MAKE)" -f  "systick_irq.mk" PostBuild
+	@echo "----------Building project:[ random_number - Debug ]----------"
+	@cd "random_number" && "$(MAKE)" -f  "random_number.mk" && "$(MAKE)" -f  "random_number.mk" PostBuild
 clean:
-	@echo "----------Cleaning project:[ systick_irq - Debug ]----------"
-	@cd "systick_irq" && "$(MAKE)" -f  "systick_irq.mk" clean
+	@echo "----------Cleaning project:[ random_number - Debug ]----------"
+	@cd "random_number" && "$(MAKE)" -f  "random_number.mk" clean

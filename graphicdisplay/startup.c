@@ -416,12 +416,11 @@ void main(void)
     */
     
     // ex3.14
-    /*
     while (1)
     {
         draw_polygon(&pg1);
         delay_milli(500);
         graphic_clear_screen();
+        delay_milli(500);
     }
-    */
 }
