@@ -1,8 +1,8 @@
 .PHONY: clean All
 
 All:
-	@echo "----------Building project:[ spindeljakt - Debug ]----------"
-	@cd "spindeljakt" && "$(MAKE)" -f  "spindeljakt.mk" && "$(MAKE)" -f  "spindeljakt.mk" PostBuild
+	@echo "----------Building project:[ getsetpsr - Debug ]----------"
+	@cd "getsetpsr" && "$(MAKE)" -f  "getsetpsr.mk" && "$(MAKE)" -f  "getsetpsr.mk" PostBuild
 clean:
-	@echo "----------Cleaning project:[ spindeljakt - Debug ]----------"
-	@cd "spindeljakt" && "$(MAKE)" -f  "spindeljakt.mk" clean
+	@echo "----------Cleaning project:[ getsetpsr - Debug ]----------"
+	@cd "getsetpsr" && "$(MAKE)" -f  "getsetpsr.mk" clean

@@ -31,6 +31,10 @@
   "directory": "/home/william/Documents/eda482/keyb",
   "command": "/usr/share/codelite/tools/gcc-arm/bin/arm-none-eabi-gcc -c /home/william/Documents/eda482/keyb/startup.c -o /home/william/Documents/eda482/keyb/startup.c.o -target arm-none-eabi -I/usr/share/codelite/tools/gcc-arm/arm-none-eabi/include/c++/9.2.1 -I/usr/share/codelite/tools/gcc-arm/arm-none-eabi/include/c++/9.2.1/arm-none-eabi -I/usr/share/codelite/tools/gcc-arm/arm-none-eabi/include/c++/9.2.1/backward -I/usr/share/codelite/tools/gcc-arm/lib/gcc/arm-none-eabi/9.2.1/include -I/usr/share/codelite/tools/gcc-arm/lib/gcc/arm-none-eabi/9.2.1/include-fixed -I/usr/share/codelite/tools/gcc-arm/arm-none-eabi/include -I. -I.  -g  -O0  -w  -mthumb -march=armv6-m  -mfloat-abi=soft  -std=c99"
  }, {
+  "file": "/home/william/Documents/eda482/getsetpsr/startup.c",
+  "directory": "/home/william/Documents/eda482/getsetpsr",
+  "command": "/usr/share/codelite/tools/gcc-arm/bin/arm-none-eabi-gcc -c /home/william/Documents/eda482/getsetpsr/startup.c -o /home/william/Documents/eda482/getsetpsr/startup.c.o -target arm-none-eabi -I/usr/share/codelite/tools/gcc-arm/arm-none-eabi/include/c++/9.2.1 -I/usr/share/codelite/tools/gcc-arm/arm-none-eabi/include/c++/9.2.1/arm-none-eabi -I/usr/share/codelite/tools/gcc-arm/arm-none-eabi/include/c++/9.2.1/backward -I/usr/share/codelite/tools/gcc-arm/lib/gcc/arm-none-eabi/9.2.1/include -I/usr/share/codelite/tools/gcc-arm/lib/gcc/arm-none-eabi/9.2.1/include-fixed -I/usr/share/codelite/tools/gcc-arm/arm-none-eabi/include -I. -I.  -g  -O0  -w  -mthumb -march=armv6-m  -mfloat-abi=soft  -std=c99"
+ }, {
   "file": "/home/william/Documents/eda482/test/main.c",
   "directory": "/home/william/Documents/eda482/test",
   "command": "/usr/bin/gcc -c /home/william/Documents/eda482/test/main.c -o /home/william/Documents/eda482/test/main.c.o -target x86_64-pc-linux-gnu -I/usr/include/c++/12.2.1 -I/usr/include/c++/12.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/12.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/12.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/12.2.1/include-fixed -I/usr/include -I. -I.  -gdwarf-2  -O0  -Wall"

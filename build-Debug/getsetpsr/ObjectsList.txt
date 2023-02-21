@@ -1,0 +1,1 @@
+../build-Debug/getsetpsr/startup.c.o
