@@ -1,8 +1,8 @@
 .PHONY: clean All
 
 All:
-	@echo "----------Building project:[ getsetpsr - Debug ]----------"
-	@cd "getsetpsr" && "$(MAKE)" -f  "getsetpsr.mk" && "$(MAKE)" -f  "getsetpsr.mk" PostBuild
+	@echo "----------Building project:[ systick_irq - Debug ]----------"
+	@cd "systick_irq" && "$(MAKE)" -f  "systick_irq.mk" && "$(MAKE)" -f  "systick_irq.mk" PostBuild
 clean:
-	@echo "----------Cleaning project:[ getsetpsr - Debug ]----------"
-	@cd "getsetpsr" && "$(MAKE)" -f  "getsetpsr.mk" clean
+	@echo "----------Cleaning project:[ systick_irq - Debug ]----------"
+	@cd "systick_irq" && "$(MAKE)" -f  "systick_irq.mk" clean

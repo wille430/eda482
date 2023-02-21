@@ -12,7 +12,8 @@
   <Project Name="delay" Path="delay/delay.project" Active="No"/>
   <Project Name="singlepong" Path="singlepong/singlepong.project" Active="No"/>
   <Project Name="spindeljakt" Path="spindeljakt/spindeljakt.project" Active="No"/>
-  <Project Name="getsetpsr" Path="getsetpsr/getsetpsr.project" Active="Yes"/>
+  <Project Name="getsetpsr" Path="getsetpsr/getsetpsr.project" Active="No"/>
+  <Project Name="systick_irq" Path="systick_irq/systick_irq.project" Active="Yes"/>
   <BuildMatrix>
     <WorkspaceConfiguration Name="Debug">
       <Environment/>
@@ -29,6 +30,7 @@
       <Project Name="singlepong" ConfigName="Debug"/>
       <Project Name="spindeljakt" ConfigName="Debug"/>
       <Project Name="getsetpsr" ConfigName="Debug"/>
+      <Project Name="systick_irq" ConfigName="Debug"/>
     </WorkspaceConfiguration>
     <WorkspaceConfiguration Name="Release">
       <Environment/>
@@ -45,6 +47,7 @@
       <Project Name="singlepong" ConfigName="Release"/>
       <Project Name="spindeljakt" ConfigName="Release"/>
       <Project Name="getsetpsr" ConfigName="Release"/>
+      <Project Name="systick_irq" ConfigName="Release"/>
     </WorkspaceConfiguration>
   </BuildMatrix>
 </CodeLite_Workspace>
