@@ -1,8 +1,8 @@
 .PHONY: clean All
 
 All:
-	@echo "----------Building project:[ random_number - Debug ]----------"
-	@cd "random_number" && "$(MAKE)" -f  "random_number.mk" && "$(MAKE)" -f  "random_number.mk" PostBuild
+	@echo "----------Building project:[ unaligned - Debug ]----------"
+	@cd "unaligned" && "$(MAKE)" -f  "unaligned.mk" && "$(MAKE)" -f  "unaligned.mk" PostBuild
 clean:
-	@echo "----------Cleaning project:[ random_number - Debug ]----------"
-	@cd "random_number" && "$(MAKE)" -f  "random_number.mk" clean
+	@echo "----------Cleaning project:[ unaligned - Debug ]----------"
+	@cd "unaligned" && "$(MAKE)" -f  "unaligned.mk" clean

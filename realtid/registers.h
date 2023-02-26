@@ -1,15 +1,6 @@
-/*
- * 	startup.c
- *
- */
-__attribute__((naked)) __attribute__((section (".start_section")) )
-void startup ( void )
-{
-__asm__ volatile(" LDR R0,=0x2001C000\n");		/* set stack */
-__asm__ volatile(" MOV SP,R0\n");
-__asm__ volatile(" BL main\n");					/* call main */
-__asm__ volatile(".L1: B .L1\n");				/* never return */
-}
+
+#ifndef REGISTERS_H
+#define REGISTERS_H
 
 typedef volatile struct {
     union {
@@ -38,6 +29,7 @@ typedef volatile struct {
     unsigned short ARR;
     unsigned short reserved_7;
 } TIMX, *PTIMX;
+
 
 typedef volatile struct {
     unsigned int   MODER;
@@ -69,38 +61,4 @@ typedef volatile struct {
     unsigned int   AFRH;
 } GPIO, *PGPIO;
 
-#define GPIO_D  (*((volatile PGPIO) 0x40020C00))
-#define TIM6    (*((volatile PTIMX) 0x40001000))
-
-#define B_UDIS  (1<<1)
-#define B_CEN   (1<<0)
-
-void timer6_init(void)
-{
-    TIM6.CR1 &= ~B_CEN;
-    TIM6.ARR  = 0xFFFF;
-    TIM6.CR1 |= (B_CEN | B_UDIS);
-}
-
-void gpio_init(void)
-{
-    GPIO_D.MODER = 0x00005555;
-}
-
-
-// 1. 05, 0F, 19, 23, 2d
-// 2. 00, 09, 13, 1d, 27
-
-void main(void)
-{
-    char random = 0;
-    gpio_init();
-    timer6_init();
-    
-    while (1)
-    {
-        GPIO_D.ODR_LOW = random;
-        random = (char) TIM6.CNT;
-    }
-}
-
+#endif

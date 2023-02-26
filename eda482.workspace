@@ -14,7 +14,9 @@
   <Project Name="spindeljakt" Path="spindeljakt/spindeljakt.project" Active="No"/>
   <Project Name="getsetpsr" Path="getsetpsr/getsetpsr.project" Active="No"/>
   <Project Name="systick_irq" Path="systick_irq/systick_irq.project" Active="No"/>
-  <Project Name="random_number" Path="random_number/random_number.project" Active="Yes"/>
+  <Project Name="random_number" Path="random_number/random_number.project" Active="No"/>
+  <Project Name="realtid" Path="realtid/realtid.project" Active="No"/>
+  <Project Name="unaligned" Path="unaligned/unaligned.project" Active="Yes"/>
   <BuildMatrix>
     <WorkspaceConfiguration Name="Debug">
       <Environment/>
@@ -33,6 +35,8 @@
       <Project Name="getsetpsr" ConfigName="Debug"/>
       <Project Name="systick_irq" ConfigName="Debug"/>
       <Project Name="random_number" ConfigName="Debug"/>
+      <Project Name="realtid" ConfigName="Debug"/>
+      <Project Name="unaligned" ConfigName="Debug"/>
     </WorkspaceConfiguration>
     <WorkspaceConfiguration Name="Release">
       <Environment/>
@@ -51,6 +55,8 @@
       <Project Name="getsetpsr" ConfigName="Release"/>
       <Project Name="systick_irq" ConfigName="Release"/>
       <Project Name="random_number" ConfigName="Release"/>
+      <Project Name="realtid" ConfigName="Release"/>
+      <Project Name="unaligned" ConfigName="Release"/>
     </WorkspaceConfiguration>
   </BuildMatrix>
 </CodeLite_Workspace>
