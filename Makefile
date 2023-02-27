@@ -1,8 +1,8 @@
 .PHONY: clean All
 
 All:
-	@echo "----------Building project:[ unaligned - Debug ]----------"
-	@cd "unaligned" && "$(MAKE)" -f  "unaligned.mk" && "$(MAKE)" -f  "unaligned.mk" PostBuild
+	@echo "----------Building project:[ flipflop_irq_vectored - Debug ]----------"
+	@cd "flipflop_irq_vectored" && "$(MAKE)" -f  "flipflop_irq_vectored.mk" && "$(MAKE)" -f  "flipflop_irq_vectored.mk" PostBuild
 clean:
-	@echo "----------Cleaning project:[ unaligned - Debug ]----------"
-	@cd "unaligned" && "$(MAKE)" -f  "unaligned.mk" clean
+	@echo "----------Cleaning project:[ flipflop_irq_vectored - Debug ]----------"
+	@cd "flipflop_irq_vectored" && "$(MAKE)" -f  "flipflop_irq_vectored.mk" clean

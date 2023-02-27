@@ -1,4 +1,12 @@
 [{
+  "file": "/home/william/Documents/eda482/flipflop_irq_vectored/startup.c",
+  "directory": "/home/william/Documents/eda482/flipflop_irq_vectored",
+  "command": "/usr/share/codelite/tools/gcc-arm/bin/arm-none-eabi-gcc -c /home/william/Documents/eda482/flipflop_irq_vectored/startup.c -o /home/william/Documents/eda482/flipflop_irq_vectored/startup.c.o -target arm-none-eabi -I/usr/share/codelite/tools/gcc-arm/arm-none-eabi/include/c++/9.2.1 -I/usr/share/codelite/tools/gcc-arm/arm-none-eabi/include/c++/9.2.1/arm-none-eabi -I/usr/share/codelite/tools/gcc-arm/arm-none-eabi/include/c++/9.2.1/backward -I/usr/share/codelite/tools/gcc-arm/lib/gcc/arm-none-eabi/9.2.1/include -I/usr/share/codelite/tools/gcc-arm/lib/gcc/arm-none-eabi/9.2.1/include-fixed -I/usr/share/codelite/tools/gcc-arm/arm-none-eabi/include -I. -I.  -g  -O0  -w  -mthumb -march=armv6-m  -mfloat-abi=soft  -std=c99"
+ }, {
+  "file": "/home/william/Documents/eda482/flipflop_irq_vectored/registers.h",
+  "directory": "/home/william/Documents/eda482/flipflop_irq_vectored",
+  "command": "/usr/share/codelite/tools/gcc-arm/bin/arm-none-eabi-g++ -c /home/william/Documents/eda482/flipflop_irq_vectored/registers.h -o /home/william/Documents/eda482/flipflop_irq_vectored/registers.h.o -target arm-none-eabi -I/usr/share/codelite/tools/gcc-arm/arm-none-eabi/include/c++/9.2.1 -I/usr/share/codelite/tools/gcc-arm/arm-none-eabi/include/c++/9.2.1/arm-none-eabi -I/usr/share/codelite/tools/gcc-arm/arm-none-eabi/include/c++/9.2.1/backward -I/usr/share/codelite/tools/gcc-arm/lib/gcc/arm-none-eabi/9.2.1/include -I/usr/share/codelite/tools/gcc-arm/lib/gcc/arm-none-eabi/9.2.1/include-fixed -I/usr/share/codelite/tools/gcc-arm/arm-none-eabi/include -I. -I.  -g  -O0  -W"
+ }, {
   "file": "/home/william/Documents/eda482/unaligned/startup.c",
   "directory": "/home/william/Documents/eda482/unaligned",
   "command": "/usr/share/codelite/tools/gcc-arm/bin/arm-none-eabi-gcc -c /home/william/Documents/eda482/unaligned/startup.c -o /home/william/Documents/eda482/unaligned/startup.c.o -target arm-none-eabi -I/usr/share/codelite/tools/gcc-arm/arm-none-eabi/include/c++/9.2.1 -I/usr/share/codelite/tools/gcc-arm/arm-none-eabi/include/c++/9.2.1/arm-none-eabi -I/usr/share/codelite/tools/gcc-arm/arm-none-eabi/include/c++/9.2.1/backward -I/usr/share/codelite/tools/gcc-arm/lib/gcc/arm-none-eabi/9.2.1/include -I/usr/share/codelite/tools/gcc-arm/lib/gcc/arm-none-eabi/9.2.1/include-fixed -I/usr/share/codelite/tools/gcc-arm/arm-none-eabi/include -I. -I.  -g  -O0  -w  -mthumb -march=armv6-m  -mfloat-abi=soft  -std=c99"
@@ -47,9 +55,25 @@
   "directory": "/home/william/Documents/eda482/random_number",
   "command": "/usr/share/codelite/tools/gcc-arm/bin/arm-none-eabi-gcc -c /home/william/Documents/eda482/random_number/startup.c -o /home/william/Documents/eda482/random_number/startup.c.o -target arm-none-eabi -I/usr/share/codelite/tools/gcc-arm/arm-none-eabi/include/c++/9.2.1 -I/usr/share/codelite/tools/gcc-arm/arm-none-eabi/include/c++/9.2.1/arm-none-eabi -I/usr/share/codelite/tools/gcc-arm/arm-none-eabi/include/c++/9.2.1/backward -I/usr/share/codelite/tools/gcc-arm/lib/gcc/arm-none-eabi/9.2.1/include -I/usr/share/codelite/tools/gcc-arm/lib/gcc/arm-none-eabi/9.2.1/include-fixed -I/usr/share/codelite/tools/gcc-arm/arm-none-eabi/include -I. -I.  -g  -O0  -w  -mthumb -march=armv6-m  -mfloat-abi=soft  -std=c99"
  }, {
+  "file": "/home/william/Documents/eda482/flipflop_irq_ack/startup.c",
+  "directory": "/home/william/Documents/eda482/flipflop_irq_ack",
+  "command": "/usr/share/codelite/tools/gcc-arm/bin/arm-none-eabi-gcc -c /home/william/Documents/eda482/flipflop_irq_ack/startup.c -o /home/william/Documents/eda482/flipflop_irq_ack/startup.c.o -target arm-none-eabi -I/usr/share/codelite/tools/gcc-arm/arm-none-eabi/include/c++/9.2.1 -I/usr/share/codelite/tools/gcc-arm/arm-none-eabi/include/c++/9.2.1/arm-none-eabi -I/usr/share/codelite/tools/gcc-arm/arm-none-eabi/include/c++/9.2.1/backward -I/usr/share/codelite/tools/gcc-arm/lib/gcc/arm-none-eabi/9.2.1/include -I/usr/share/codelite/tools/gcc-arm/lib/gcc/arm-none-eabi/9.2.1/include-fixed -I/usr/share/codelite/tools/gcc-arm/arm-none-eabi/include -I. -I.  -g  -O0  -w  -mthumb -march=armv6-m  -mfloat-abi=soft  -std=c99"
+ }, {
+  "file": "/home/william/Documents/eda482/flipflop_irq_ack/registers.h",
+  "directory": "/home/william/Documents/eda482/flipflop_irq_ack",
+  "command": "/usr/share/codelite/tools/gcc-arm/bin/arm-none-eabi-g++ -c /home/william/Documents/eda482/flipflop_irq_ack/registers.h -o /home/william/Documents/eda482/flipflop_irq_ack/registers.h.o -target arm-none-eabi -I/usr/share/codelite/tools/gcc-arm/arm-none-eabi/include/c++/9.2.1 -I/usr/share/codelite/tools/gcc-arm/arm-none-eabi/include/c++/9.2.1/arm-none-eabi -I/usr/share/codelite/tools/gcc-arm/arm-none-eabi/include/c++/9.2.1/backward -I/usr/share/codelite/tools/gcc-arm/lib/gcc/arm-none-eabi/9.2.1/include -I/usr/share/codelite/tools/gcc-arm/lib/gcc/arm-none-eabi/9.2.1/include-fixed -I/usr/share/codelite/tools/gcc-arm/arm-none-eabi/include -I. -I.  -g  -O0  -W"
+ }, {
   "file": "/home/william/Documents/eda482/movepong/startup.c",
   "directory": "/home/william/Documents/eda482/movepong",
   "command": "/usr/share/codelite/tools/gcc-arm/bin/arm-none-eabi-gcc -c /home/william/Documents/eda482/movepong/startup.c -o /home/william/Documents/eda482/movepong/startup.c.o -target arm-none-eabi -I/usr/share/codelite/tools/gcc-arm/arm-none-eabi/include/c++/9.2.1 -I/usr/share/codelite/tools/gcc-arm/arm-none-eabi/include/c++/9.2.1/arm-none-eabi -I/usr/share/codelite/tools/gcc-arm/arm-none-eabi/include/c++/9.2.1/backward -I/usr/share/codelite/tools/gcc-arm/lib/gcc/arm-none-eabi/9.2.1/include -I/usr/share/codelite/tools/gcc-arm/lib/gcc/arm-none-eabi/9.2.1/include-fixed -I/usr/share/codelite/tools/gcc-arm/arm-none-eabi/include -DSIMULATOR -I. -I.  -g  -O0  -w  -mthumb -march=armv6-m  -mfloat-abi=soft  -std=c99"
+ }, {
+  "file": "/home/william/Documents/eda482/flipflop_irq/startup.c",
+  "directory": "/home/william/Documents/eda482/flipflop_irq",
+  "command": "/usr/share/codelite/tools/gcc-arm/bin/arm-none-eabi-gcc -c /home/william/Documents/eda482/flipflop_irq/startup.c -o /home/william/Documents/eda482/flipflop_irq/startup.c.o -target arm-none-eabi -I/usr/share/codelite/tools/gcc-arm/arm-none-eabi/include/c++/9.2.1 -I/usr/share/codelite/tools/gcc-arm/arm-none-eabi/include/c++/9.2.1/arm-none-eabi -I/usr/share/codelite/tools/gcc-arm/arm-none-eabi/include/c++/9.2.1/backward -I/usr/share/codelite/tools/gcc-arm/lib/gcc/arm-none-eabi/9.2.1/include -I/usr/share/codelite/tools/gcc-arm/lib/gcc/arm-none-eabi/9.2.1/include-fixed -I/usr/share/codelite/tools/gcc-arm/arm-none-eabi/include -I. -I.  -g  -O0  -w  -mthumb -march=armv6-m  -mfloat-abi=soft  -std=c99"
+ }, {
+  "file": "/home/william/Documents/eda482/flipflop_irq/registers.h",
+  "directory": "/home/william/Documents/eda482/flipflop_irq",
+  "command": "/usr/share/codelite/tools/gcc-arm/bin/arm-none-eabi-g++ -c /home/william/Documents/eda482/flipflop_irq/registers.h -o /home/william/Documents/eda482/flipflop_irq/registers.h.o -target arm-none-eabi -I/usr/share/codelite/tools/gcc-arm/arm-none-eabi/include/c++/9.2.1 -I/usr/share/codelite/tools/gcc-arm/arm-none-eabi/include/c++/9.2.1/arm-none-eabi -I/usr/share/codelite/tools/gcc-arm/arm-none-eabi/include/c++/9.2.1/backward -I/usr/share/codelite/tools/gcc-arm/lib/gcc/arm-none-eabi/9.2.1/include -I/usr/share/codelite/tools/gcc-arm/lib/gcc/arm-none-eabi/9.2.1/include-fixed -I/usr/share/codelite/tools/gcc-arm/arm-none-eabi/include -I. -I.  -g  -O0  -W"
  }, {
   "file": "/home/william/Documents/eda482/test/main.c",
   "directory": "/home/william/Documents/eda482/test",
