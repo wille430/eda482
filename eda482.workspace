@@ -19,7 +19,8 @@
   <Project Name="unaligned" Path="unaligned/unaligned.project" Active="No"/>
   <Project Name="flipflop_irq" Path="flipflop_irq/flipflop_irq.project" Active="No"/>
   <Project Name="flipflop_irq_ack" Path="flipflop_irq_ack/flipflop_irq_ack.project" Active="No"/>
-  <Project Name="flipflop_irq_vectored" Path="flipflop_irq_vectored/flipflop_irq_vectored.project" Active="Yes"/>
+  <Project Name="flipflop_irq_vectored" Path="flipflop_irq_vectored/flipflop_irq_vectored.project" Active="No"/>
+  <Project Name="lab5" Path="lab5/lab5.project" Active="Yes"/>
   <BuildMatrix>
     <WorkspaceConfiguration Name="Debug">
       <Environment/>
@@ -43,6 +44,7 @@
       <Project Name="flipflop_irq" ConfigName="Debug"/>
       <Project Name="flipflop_irq_ack" ConfigName="Debug"/>
       <Project Name="flipflop_irq_vectored" ConfigName="Debug"/>
+      <Project Name="lab5" ConfigName="Debug"/>
     </WorkspaceConfiguration>
     <WorkspaceConfiguration Name="Release">
       <Environment/>
@@ -66,6 +68,7 @@
       <Project Name="flipflop_irq" ConfigName="Release"/>
       <Project Name="flipflop_irq_ack" ConfigName="Release"/>
       <Project Name="flipflop_irq_vectored" ConfigName="Release"/>
+      <Project Name="lab5" ConfigName="Release"/>
     </WorkspaceConfiguration>
   </BuildMatrix>
 </CodeLite_Workspace>
