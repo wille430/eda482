@@ -1,1 +1,0 @@
-../build-Debug/systick_irq/startup.c.o

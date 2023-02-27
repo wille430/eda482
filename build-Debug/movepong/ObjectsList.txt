@@ -1,1 +1,0 @@
-../build-Debug/movepong/startup.c.o

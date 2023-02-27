@@ -63,4 +63,4 @@ Debug/
 
 ./Makefile
 
-./build-Debug
+build-Debug/
