@@ -62,3 +62,5 @@ Debug/
 .codelite/
 
 ./Makefile
+
+./build-Debug
