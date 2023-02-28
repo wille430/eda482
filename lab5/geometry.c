@@ -20,11 +20,20 @@ void scale(int fac, PVec3 vec)
     vec->z *= fac;
 }
 
-void matvec_mul(Matrix44 m, PVec3 vec, PVec3 retVec)
+void matvec_mul(Matrix44 m, PVec3 vec, PVec3 out)
 {
-    retVec->x = vec->x * m[0][0] + vec->y * m[0][1] + vec->z * m[0][2];
-    retVec->y = vec->x * m[1][0] + vec->y * m[1][1] + vec->z * m[1][2];
-    retVec->z = vec->x * m[2][0] + vec->y * m[2][1] + vec->z * m[2][2];
+    out->x = vec->x * m[0][0] + vec->y * m[0][1] + vec->z * m[0][2] + m[0][3];
+    out->y = vec->x * m[1][0] + vec->y * m[1][1] + vec->z * m[1][2] + m[1][3];
+    out->z = vec->x * m[2][0] + vec->y * m[2][1] + vec->z * m[2][2] + m[2][3];
+    
+    float w = vec->x * m[3][0] + vec->y * m[3][1] + vec->z * m[3][2] + m[3][3];
+ 
+    // normalize if w is different than 1 (convert from homogeneous to Cartesian coordinates)
+    if (w != 1) { 
+        out->x /= w; 
+        out->y /= w; 
+        out->z /= w; 
+    } 
 }
 
 void matmul(Matrix44 A, Matrix44 B, Matrix44 ret)
@@ -47,17 +56,6 @@ void setProjectionMatrix(float angleOfView, float near, float far, Matrix44 M)
     bottom = near * t;
     left = -right;
     top = -bottom;
-    
-    /*
-    // set the basic projection matrix
-    float scale = 1 / tan(angleOfView * 0.5 * M_PI / 180); 
-    M[0][0] = scale;  //scale the x coordinates of the projected point 
-    M[1][1] = scale;  //scale the y coordinates of the projected point 
-    M[2][2] = -far / (far - near);  //used to remap z to [0,1] 
-    M[3][2] = -far * near / (far - near);  //used to remap z [0,1] 
-    M[2][3] = -1;  //set w = -z 
-    M[3][3] = 0; 
-     */
      
      M[0][0] = 1 / (SCREEN_WIDTH / SCREEN_HEIGHT * t);
      M[1][1] = 1/ t;

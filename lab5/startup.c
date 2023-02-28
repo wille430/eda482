@@ -19,22 +19,44 @@ __asm__ volatile(".L1: B .L1\n");				/* never return */
 static OBJECT teapot = {
     {0,0,0},
     {0,0,0},
+    10, 10, 10,
     {{1,0,0,0}, {0,1,0,0}, {0,0,1,0}, {0,0,0,1}},
     numVertices,
     &vertices
 };
 
-void main(void)
+void show_rotating_cube(void)
 {
-    init_graphics();
     OBJECT cube;
     create_cube(&cube, 10, 10);
+    
+    cube.pos.z = 0;
+    cube.pos.y = cube.height*0.75;
     
     while (1)
     {
         draw_object(&cube);
-        rotate_object(&cube, 5.0);
+        rotate_object_x(&cube, -30.0);
+        rotate_object_z(&cube, 30.0);
         delay_milli(1);
         graphic_clear_screen();
     }
+}
+
+void show_rotating_teapot()
+{
+    teapot.pos.z = -20;
+    while (1)
+    {
+        draw_object(&teapot);
+        rotate_object_y(&teapot, 30.0);
+        delay_milli(1);
+        graphic_clear_screen();
+    }
+}
+
+void main(void)
+{
+    init_graphics();
+    show_rotating_teapot();
 }

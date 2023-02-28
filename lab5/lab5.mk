@@ -14,7 +14,7 @@ CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=William
-Date                   :=02/27/2023
+Date                   :=02/28/2023
 CodeLitePath           :=/home/william/.codelite
 MakeDirCommand         :=mkdir -p
 LinkerName             :=/usr/share/codelite/tools/gcc-arm/bin/arm-none-eabi-g++
@@ -68,7 +68,7 @@ ARM_M4SFPLIB:=$(CodeLiteDir)/tools/gcc-arm/arm-none-eabi/lib/thumb/v7e-m+fp/soft
 ARM_GCC_M4SFPLIB:=$(CodeLiteDir)/tools/gcc-arm/lib/gcc/arm-none-eabi/9.2.1/thumb/v7e-m+fp/softfp
 ARM_M4HFPLIB:=$(CodeLiteDir)/tools/gcc-arm/arm-none-eabi/lib/thumb/v7e-m+fp/hard
 ARM_GCC_M4HFPLIB:=$(CodeLiteDir)/tools/gcc-arm/lib/gcc/arm-none-eabi/9.2.1/thumb/v7e-m+fp/hard
-Objects0=$(IntermediateDirectory)/math.c$(ObjectSuffix) $(IntermediateDirectory)/geometry.c$(ObjectSuffix) $(IntermediateDirectory)/delay.c$(ObjectSuffix) $(IntermediateDirectory)/startup.c$(ObjectSuffix) $(IntermediateDirectory)/display.c$(ObjectSuffix) $(IntermediateDirectory)/graphics.c$(ObjectSuffix) $(IntermediateDirectory)/utils.c$(ObjectSuffix) 
+Objects0=$(IntermediateDirectory)/utils.c$(ObjectSuffix) $(IntermediateDirectory)/graphics.c$(ObjectSuffix) $(IntermediateDirectory)/math.c$(ObjectSuffix) $(IntermediateDirectory)/geometry.c$(ObjectSuffix) $(IntermediateDirectory)/delay.c$(ObjectSuffix) $(IntermediateDirectory)/startup.c$(ObjectSuffix) $(IntermediateDirectory)/display.c$(ObjectSuffix) 
 
 
 
@@ -105,6 +105,22 @@ PreBuild:
 ##
 ## Objects
 ##
+$(IntermediateDirectory)/utils.c$(ObjectSuffix): utils.c $(IntermediateDirectory)/utils.c$(DependSuffix)
+	$(CC) $(SourceSwitch) "/home/william/Documents/eda482/lab5/utils.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/utils.c$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/utils.c$(DependSuffix): utils.c
+	@$(CC) $(CFLAGS) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/utils.c$(ObjectSuffix) -MF$(IntermediateDirectory)/utils.c$(DependSuffix) -MM utils.c
+
+$(IntermediateDirectory)/utils.c$(PreprocessSuffix): utils.c
+	$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/utils.c$(PreprocessSuffix) utils.c
+
+$(IntermediateDirectory)/graphics.c$(ObjectSuffix): graphics.c $(IntermediateDirectory)/graphics.c$(DependSuffix)
+	$(CC) $(SourceSwitch) "/home/william/Documents/eda482/lab5/graphics.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/graphics.c$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/graphics.c$(DependSuffix): graphics.c
+	@$(CC) $(CFLAGS) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/graphics.c$(ObjectSuffix) -MF$(IntermediateDirectory)/graphics.c$(DependSuffix) -MM graphics.c
+
+$(IntermediateDirectory)/graphics.c$(PreprocessSuffix): graphics.c
+	$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/graphics.c$(PreprocessSuffix) graphics.c
+
 $(IntermediateDirectory)/math.c$(ObjectSuffix): math.c $(IntermediateDirectory)/math.c$(DependSuffix)
 	$(CC) $(SourceSwitch) "/home/william/Documents/eda482/lab5/math.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/math.c$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/math.c$(DependSuffix): math.c
@@ -144,22 +160,6 @@ $(IntermediateDirectory)/display.c$(DependSuffix): display.c
 
 $(IntermediateDirectory)/display.c$(PreprocessSuffix): display.c
 	$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/display.c$(PreprocessSuffix) display.c
-
-$(IntermediateDirectory)/graphics.c$(ObjectSuffix): graphics.c $(IntermediateDirectory)/graphics.c$(DependSuffix)
-	$(CC) $(SourceSwitch) "/home/william/Documents/eda482/lab5/graphics.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/graphics.c$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/graphics.c$(DependSuffix): graphics.c
-	@$(CC) $(CFLAGS) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/graphics.c$(ObjectSuffix) -MF$(IntermediateDirectory)/graphics.c$(DependSuffix) -MM graphics.c
-
-$(IntermediateDirectory)/graphics.c$(PreprocessSuffix): graphics.c
-	$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/graphics.c$(PreprocessSuffix) graphics.c
-
-$(IntermediateDirectory)/utils.c$(ObjectSuffix): utils.c $(IntermediateDirectory)/utils.c$(DependSuffix)
-	$(CC) $(SourceSwitch) "/home/william/Documents/eda482/lab5/utils.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/utils.c$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/utils.c$(DependSuffix): utils.c
-	@$(CC) $(CFLAGS) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/utils.c$(ObjectSuffix) -MF$(IntermediateDirectory)/utils.c$(DependSuffix) -MM utils.c
-
-$(IntermediateDirectory)/utils.c$(PreprocessSuffix): utils.c
-	$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/utils.c$(PreprocessSuffix) utils.c
 
 
 -include $(IntermediateDirectory)/*$(DependSuffix)
