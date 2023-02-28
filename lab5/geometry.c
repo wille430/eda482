@@ -88,3 +88,11 @@ void create_identity_matrix(Matrix44 M)
     M[2][2] = 1;
     M[3][3] = 1;
 }
+
+
+void add_vec(PVec3 v1, PVec3 v2, PVec3 out)
+{
+    out->x = v1->x + v2->x;
+    out->y = v1->y + v2->y;
+    out->z = v1->z + v2->z;
+}

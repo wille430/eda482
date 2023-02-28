@@ -17,12 +17,16 @@ __asm__ volatile(".L1: B .L1\n");				/* never return */
 }
 
 static OBJECT teapot = {
-    {0,0,0},
-    {0,0,0},
-    10, 10, 10,
-    {{1,0,0,0}, {0,1,0,0}, {0,0,1,0}, {0,0,0,1}},
-    numVertices,
-    &vertices
+    { // shape
+        10, 10, 10,
+        numVertices,
+        &vertices    
+    },
+    { // transform
+        {0,0,0},
+        {0,0,0},
+        {{1,0,0,0}, {0,1,0,0}, {0,0,1,0}, {0,0,0,1}}
+    }
 };
 
 void show_rotating_cube(void)
@@ -30,8 +34,9 @@ void show_rotating_cube(void)
     OBJECT cube;
     create_cube(&cube, 10, 10);
     
-    cube.pos.z = -10;
-    cube.pos.y = cube.height*0.75;
+    cube.transform.pos.z = -10;
+    cube.transform.pos.y = cube.shape.height*0.75;
+    cube.transform.pos.x = cube.shape.width*0.25;
     
     while (1)
     {
@@ -40,12 +45,15 @@ void show_rotating_cube(void)
         rotate_object_z(&cube, 30.0);
         delay_milli(1);
         graphic_clear_screen();
+        
+        // Vec3 cam_dpos = {0, 0, 5};
+        // move_camera(&cam_dpos);
     }
 }
 
 void show_rotating_teapot()
 {
-    teapot.pos.z = -20;
+    teapot.transform.pos.z = -20;
     while (1)
     {
         draw_object(&teapot);
@@ -59,4 +67,5 @@ void main(void)
 {
     init_graphics();
     show_rotating_cube();
+    // show_rotating_teapot();
 }
