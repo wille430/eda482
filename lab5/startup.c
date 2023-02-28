@@ -30,7 +30,7 @@ void show_rotating_cube(void)
     OBJECT cube;
     create_cube(&cube, 10, 10);
     
-    cube.pos.z = 0;
+    cube.pos.z = -10;
     cube.pos.y = cube.height*0.75;
     
     while (1)
@@ -58,5 +58,5 @@ void show_rotating_teapot()
 void main(void)
 {
     init_graphics();
-    show_rotating_teapot();
+    show_rotating_cube();
 }
