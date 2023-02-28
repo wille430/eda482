@@ -45,6 +45,13 @@ void move_camera(PVec3 dpos)
     add_vec(&camera.transform.pos, dpos, &camera.transform.pos);
 }
 
+void rotate_camera(PVec3 rot)
+{
+    if (rot->x) rotate_object_x(&camera, rot->x);
+    if (rot->y) rotate_object_y(&camera, rot->y);
+    if (rot->z) rotate_object_z(&camera, rot->z);
+}
+
 void set_camera_position(PVec3 pos)
 {
     camera.transform.pos.x = pos->x;
@@ -66,6 +73,11 @@ void update_world_to_cam_transform_matrix()
     worldToCamera[0][3] = camera.transform.pos.x; // x+t
     worldToCamera[1][3] = camera.transform.pos.y; // y+t
     worldToCamera[2][3] = camera.transform.pos.z; // z+t
+    
+    // apply camera rotation
+    Matrix44 res;
+    matmul(worldToCamera, camera.transform.rotation, res);
+    memcpy(worldToCamera, res, 16);
 }
 
 void draw_object(POBJECT obj)

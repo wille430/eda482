@@ -132,6 +132,9 @@ monitor restart</PostConnectCommands>
     </Configuration>
   </Settings>
   <VirtualDirectory Name="src">
+    <File Name="keypad.h"/>
+    <File Name="keypad.c"/>
+    <File Name="registers.h"/>
     <File Name="delay.h"/>
     <File Name="utils.c"/>
     <File Name="graphics.h"/>
