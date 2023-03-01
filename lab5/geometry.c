@@ -96,3 +96,13 @@ void add_vec(PVec3 v1, PVec3 v2, PVec3 out)
     out->y = v1->y + v2->y;
     out->z = v1->z + v2->z;
 }
+
+void mul_vec(float factor, PVec3 in, PVec3 out)
+{
+    out->x = factor * in->x;
+    out->y = factor * in->y;
+    out->z = factor * in->z;
+}
+
+
+

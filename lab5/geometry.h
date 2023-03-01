@@ -17,6 +17,7 @@ void scale(int fac, PVec3 vec);
 void matvec_mul(Matrix44 m, PVec3 vec, PVec3 retVec);
 void matmul(Matrix44 A, Matrix44 B, Matrix44 ret);
 void add_vec(PVec3 v1, PVec3 v2, PVec3 out);
+void mul_vec(float factor, PVec3 in, PVec3 out);
 
 void setProjectionMatrix(float angleOfView, float near, float far, Matrix44 M);
 void multPointMatrix(const PVec3 in, PVec3 out, Matrix44 M);

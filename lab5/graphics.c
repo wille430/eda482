@@ -14,16 +14,7 @@ static CAMERA camera;
 void init_camera()
 {
     create_identity_matrix(worldToCamera);
-    
-    camera.transform.pos.x = 0;
-    camera.transform.pos.y = -7;
-    camera.transform.pos.z = -15;
-    
     create_identity_matrix(&camera.transform.rotation);
-    
-    camera.transform.dir.x = 0;
-    camera.transform.dir.y = 0;
-    camera.transform.dir.z = 0;
 }
 
 void init_graphics()
@@ -70,14 +61,16 @@ void create_translate_matrix(PVec3 pos, Matrix44 out)
 
 void update_world_to_cam_transform_matrix()
 {
-    worldToCamera[0][3] = camera.transform.pos.x; // x+t
-    worldToCamera[1][3] = camera.transform.pos.y; // y+t
-    worldToCamera[2][3] = camera.transform.pos.z; // z+t
-    
+    create_identity_matrix(worldToCamera);
     // apply camera rotation
     Matrix44 res;
     matmul(worldToCamera, camera.transform.rotation, res);
     memcpy(worldToCamera, res, 16);
+
+    // if camera is 10 units to the right, then the world should move 10 units to the left
+    worldToCamera[0][3] = -camera.transform.pos.x; // x+t
+    worldToCamera[1][3] = -camera.transform.pos.y; // y+t
+    worldToCamera[2][3] = -camera.transform.pos.z; // z+t
 }
 
 void draw_object(POBJECT obj)
@@ -91,13 +84,16 @@ void draw_object(POBJECT obj)
     {
         Vec3 rotatedVert, translatedVert, vertCamera, projectedVert;
         
-        // rotate
+        // apply transform rotation
         multPointMatrix(&obj->shape.points[i], &rotatedVert, obj->transform.rotation);
         
         // translate
         multPointMatrix(&rotatedVert, &translatedVert, translateM);
         multPointMatrix(&translatedVert, &vertCamera, worldToCamera);
         
+        // points behind the camera should not be displayed
+        if (translatedVert.z < camera.transform.pos.z) continue;
+
         // project to screen
         multPointMatrix(&vertCamera, &projectedVert, Mproj);
         
@@ -107,7 +103,7 @@ void draw_object(POBJECT obj)
         int y = min(SCREEN_HEIGHT - 1, (int)((1 - (projectedVert.y + 1) * 0.5) * SCREEN_HEIGHT));
         
         // plot
-        graphic_pixel_set(SCREEN_WIDTH - x, SCREEN_HEIGHT - y);
+        graphic_pixel_set(x, y);
     }
 }
 
@@ -116,7 +112,7 @@ void draw_object(POBJECT obj)
 void move_to_middle(POBJECT obj)
 {
     Matrix44 translateM;
-    Vec3 move = { -obj->shape.width/2, -obj->shape.height/2, -obj->shape.depth/2 };
+    Vec3 move = { -obj->shape.width/2.0, -obj->shape.height/2.0, -obj->shape.depth/2.0 };
     create_translate_matrix(&move, translateM);
     
     for (int i = 0; i < obj->shape.numPoints; i++)
@@ -145,12 +141,20 @@ void create_cube(POBJECT cube, int width, int height)
     cube->shape.width = width;
     cube->shape.height = height;
     cube->shape.depth = width;
-    
+
+    cube->transform.pos.x = 0;
+    cube->transform.pos.y = 0;
+    cube->transform.pos.z = 0;
+
+    cube->transform.dir.x = 0;
+    cube->transform.dir.y = 0;
+    cube->transform.dir.z = 0;
+
     create_identity_matrix(&cube->transform.rotation);
     
     // to take in consideration that coordinates start at 0
-    width--;
-    height--;
+    // width--;
+    // height--;
     
     if (cubeVerticesReady) return;
     
@@ -222,7 +226,7 @@ void create_cube(POBJECT cube, int width, int height)
     for (int z = 0; z < sideVerts; z++)
         cubeVertices[pointsSize++].z = z * spacing;
     
-    move_to_middle(cube);
+    // move_to_middle(cube);
     cubeVerticesReady = 1;
 }
 
