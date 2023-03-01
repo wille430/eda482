@@ -35,6 +35,7 @@ static Vec3 cameraFocusOffset = {0,0.5,-2.5};
 static OBJECT teapot = {
     { // shape
         10, 10, 10,
+        0,
         numVertices,
         &vertices    
     },
@@ -77,7 +78,7 @@ void show_rotating_teapot()
 }
 
 POBJECT place_cube(POBJECT cube, PVec3 pos) {
-    create_cube(cube, CUBE_WIDTH, CUBE_HEIGHT);
+    create_cube_lines(cube, CUBE_WIDTH, CUBE_HEIGHT);
 
     // move to specifed position
     cube->transform.pos.x = pos->x;

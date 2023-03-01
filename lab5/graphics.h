@@ -5,10 +5,23 @@
 #include "geometry.h"
 
 typedef struct {
-    
+    Vec3 start;
+    Vec3 end;
+} LINE, *PLINE;
+
+typedef struct {
     int width, height, depth;
-    int numPoints;
-    Vec3 * points;
+    char hasLines;
+    union {
+        struct {
+            int numPoints;
+            Vec3 * points;
+        };
+        struct {
+            int numLines;
+            PLINE lines;
+        };
+    };
 } SHAPE, *PSHAPE;
 
 typedef struct {

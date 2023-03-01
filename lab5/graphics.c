@@ -73,8 +73,108 @@ void update_world_to_cam_transform_matrix()
     worldToCamera[2][3] = -camera.transform.pos.z; // z+t
 }
 
+int is_valid_point(int x, int y)
+{
+    return x >= 0 && x < SCREEN_WIDTH &&
+           y >= 0 && y < SCREEN_HEIGHT;
+}
+
+int draw_line(PLINE l)
+{
+    int x0, y0, x1, y1;
+    x0 = l->start.x;
+    y0 = l->start.y;
+    x1 = l->end.x;
+    y1 = l->end.y;
+    
+    signed int dx, dy, sx, sy;
+    dx = abs(x1 - x0);
+    sx = x0 < x1 ? 1 : -1;
+    dy = -abs(y1 - y0);
+    sy = y0 < y1 ? 1 : -1;
+    
+    int err = dx + dy;
+    int e2;
+    
+    while (1)
+    {
+        graphic_pixel_set(x0, y0);
+        if ((x0 == x1 && y0 == y1) ||
+            !is_valid_point(x0, y0)) break;
+        e2 = 2 * err;
+        if (e2 >= dy) {
+            err += dy;
+            x0 += sx;
+        }
+        if (e2 <= dx)
+        {
+            err += dx;
+            y0 += sy;
+        }
+    }
+    
+    return 1;
+}
+
+
+void draw_object_lines(POBJECT obj)
+{
+    update_world_to_cam_transform_matrix();
+    
+    Matrix44 translateM;
+    create_translate_matrix(&obj->transform.pos, translateM);
+    
+    for (int i = 0; i < obj->shape.numLines; i++)
+    {
+        Vec3 rotatedVert1, translatedVert1, vertCamera1, projectedVert1;
+        Vec3 rotatedVert2, translatedVert2, vertCamera2, projectedVert2;
+        
+        // apply transform rotation
+        multPointMatrix(&obj->shape.lines[i].start, &rotatedVert1, obj->transform.rotation);
+        multPointMatrix(&obj->shape.lines[i].end, &rotatedVert2, obj->transform.rotation);
+        
+        // translate
+        multPointMatrix(&rotatedVert1, &translatedVert1, translateM);
+        multPointMatrix(&rotatedVert2, &translatedVert2, translateM);
+
+        multPointMatrix(&translatedVert1, &vertCamera1, worldToCamera);
+        multPointMatrix(&translatedVert2, &vertCamera2, worldToCamera);
+        
+        // points behind the camera should not be displayed
+        if (translatedVert1.z < camera.transform.pos.z && 
+            translatedVert2.z < camera.transform.pos.z) continue;
+
+        // project to screen
+        multPointMatrix(&vertCamera1, &projectedVert1, Mproj);
+        multPointMatrix(&vertCamera2, &projectedVert2, Mproj);
+        
+        if ((projectedVert1.x < -1 || projectedVert1.x > 1 || projectedVert1.y < -1 || projectedVert1.y > 1) &&
+            (projectedVert2.x < -1 || projectedVert2.x > 1 || projectedVert2.y < -1 || projectedVert2.y > 1)) continue;
+        
+        int x1 = min(SCREEN_WIDTH - 1, (int)((projectedVert1.x + 1) * 0.5 * SCREEN_WIDTH)); 
+        int y1 = min(SCREEN_HEIGHT - 1, (int)((1 - (projectedVert1.y + 1) * 0.5) * SCREEN_HEIGHT));
+
+        int x2 = min(SCREEN_WIDTH - 1, (int)((projectedVert2.x + 1) * 0.5 * SCREEN_WIDTH)); 
+        int y2 = min(SCREEN_HEIGHT - 1, (int)((1 - (projectedVert2.y + 1) * 0.5) * SCREEN_HEIGHT));
+
+        LINE line = {
+            {x1,y1,0},
+            {x2,y2,0}
+        };
+        
+        // plot
+        draw_line(&line);
+    }
+}
+
 void draw_object(POBJECT obj)
 {
+    if (obj->shape.hasLines)
+    {
+        draw_object_lines(obj);
+        return;
+    }
+
     update_world_to_cam_transform_matrix();
     
     Matrix44 translateM;
@@ -132,6 +232,42 @@ static Vec3 cubeVertices[cubeVerticesSize];
 // with vertices for the first time
 char cubeVerticesReady = 0;
 
+static LINE cubeLines[12] = {
+    {{0,0,0}, {0,0,1}},
+    {{0,0,1}, {1,0,1}},
+    {{1,0,1}, {1,0,0}},
+    {{1,0,0}, {0,0,0}},
+    {{0,0,0}, {0,1,0}},
+    {{0,1,0}, {0,1,1}},
+    {{0,1,1}, {1,1,1}},
+    {{1,1,1}, {1,1,0}},
+    {{1,1,0}, {0,1,0}},
+    {{1,0,0}, {1,1,0}},
+    {{1,0,1}, {1,1,1}},
+    {{0,0,1}, {0,1,1}}
+};
+
+void create_cube_lines(POBJECT cube, int width, int height)
+{
+    cube->shape.hasLines = 1;
+
+    cube->shape.numLines = 12;
+    cube->shape.lines = &cubeLines;
+    cube->shape.width = width;
+    cube->shape.height = height;
+    cube->shape.depth = width;
+
+    cube->transform.pos.x = 0;
+    cube->transform.pos.y = 0;
+    cube->transform.pos.z = 0;
+
+    cube->transform.dir.x = 0;
+    cube->transform.dir.y = 0;
+    cube->transform.dir.z = 0;
+
+    create_identity_matrix(&cube->transform.rotation);
+}
+
 void create_cube(POBJECT cube, int width, int height)
 {
     int sideVerts = cubeVerticesSize / 12;
@@ -159,7 +295,7 @@ void create_cube(POBJECT cube, int width, int height)
     if (cubeVerticesReady) return;
     
     float spacing = (float) width / sideVerts;
-    int pointsSize = 0;
+int pointsSize = 0;
     for (int x = 0; x < sideVerts; x++)
         cubeVertices[pointsSize++].x = x * spacing;
         
