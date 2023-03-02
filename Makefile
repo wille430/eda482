@@ -1,8 +1,8 @@
 .PHONY: clean All
 
 All:
-	@echo "----------Building project:[ lab5 - Debug ]----------"
-	@cd "lab5" && "$(MAKE)" -f  "lab5.mk" && "$(MAKE)" -f  "lab5.mk" PostBuild
+	@echo "----------Building project:[ test_malloc - Debug ]----------"
+	@cd "test_malloc" && "$(MAKE)" -f  "test_malloc.mk" && "$(MAKE)" -f  "test_malloc.mk" PostBuild
 clean:
-	@echo "----------Cleaning project:[ lab5 - Debug ]----------"
-	@cd "lab5" && "$(MAKE)" -f  "lab5.mk" clean
+	@echo "----------Cleaning project:[ test_malloc - Debug ]----------"
+	@cd "test_malloc" && "$(MAKE)" -f  "test_malloc.mk" clean

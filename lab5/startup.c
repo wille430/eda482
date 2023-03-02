@@ -30,7 +30,7 @@ __asm__ volatile(".L1: B .L1\n");				/* never return */
 static OBJECT cubes[MAX_CUBE_COUNT];
 static int cubesSize = 0;
 
-static Vec3 cameraFocusOffset = {0,0.5,-2.5};
+static Vec3 cameraFocusOffset = {0.5,0.5,-2.5};
 
 static OBJECT teapot = {
     { // shape
@@ -49,10 +49,8 @@ static OBJECT teapot = {
 void show_rotating_cube(void)
 {
     OBJECT cube;
-    create_cube(&cube, 10, 10);
-
-    Vec3 cam_pos = {0,0,0};
-    set_camera_position(&cam_pos);
+    create_cube_lines(&cube, 1, 1);
+    set_camera_position(&cameraFocusOffset);
 
     while (1)
     {
@@ -165,7 +163,7 @@ void main(void)
 {
     init_graphics();
     init_keypad(&GPIO_D);
-    // show_rotating_cube();
+    show_rotating_cube();
     // show_rotating_teapot();
     
     game_loop();

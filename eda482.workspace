@@ -20,7 +20,11 @@
   <Project Name="flipflop_irq" Path="flipflop_irq/flipflop_irq.project" Active="No"/>
   <Project Name="flipflop_irq_ack" Path="flipflop_irq_ack/flipflop_irq_ack.project" Active="No"/>
   <Project Name="flipflop_irq_vectored" Path="flipflop_irq_vectored/flipflop_irq_vectored.project" Active="No"/>
-  <Project Name="lab5" Path="lab5/lab5.project" Active="Yes"/>
+  <Project Name="lab5" Path="lab5/lab5.project" Active="No"/>
+  <Project Name="usart_polling" Path="usart_polling/usart_polling.project" Active="No"/>
+  <Project Name="usart_rx_irq" Path="usart_rx_irq/usart_rx_irq.project" Active="No"/>
+  <Project Name="usart_rxtx_irq" Path="usart_rxtx_irq/usart_rxtx_irq.project" Active="Yes"/>
+  <Project Name="usart_buffered" Path="usart_buffered/usart_buffered.project" Active="No"/>
   <BuildMatrix>
     <WorkspaceConfiguration Name="Debug">
       <Environment/>
@@ -45,6 +49,10 @@
       <Project Name="flipflop_irq_ack" ConfigName="Debug"/>
       <Project Name="flipflop_irq_vectored" ConfigName="Debug"/>
       <Project Name="lab5" ConfigName="Debug"/>
+      <Project Name="usart_polling" ConfigName="Debug"/>
+      <Project Name="usart_rx_irq" ConfigName="Debug"/>
+      <Project Name="usart_rxtx_irq" ConfigName="Debug"/>
+      <Project Name="usart_buffered" ConfigName="Debug"/>
     </WorkspaceConfiguration>
     <WorkspaceConfiguration Name="Release">
       <Environment/>
@@ -69,6 +77,10 @@
       <Project Name="flipflop_irq_ack" ConfigName="Release"/>
       <Project Name="flipflop_irq_vectored" ConfigName="Release"/>
       <Project Name="lab5" ConfigName="Release"/>
+      <Project Name="usart_polling" ConfigName="Release"/>
+      <Project Name="usart_rx_irq" ConfigName="Release"/>
+      <Project Name="usart_rxtx_irq" ConfigName="Release"/>
+      <Project Name="usart_buffered" ConfigName="Release"/>
     </WorkspaceConfiguration>
   </BuildMatrix>
 </CodeLite_Workspace>
