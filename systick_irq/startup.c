@@ -7,7 +7,7 @@
 #define SIMULATOR
 
 #ifdef SIMULATOR
-    #define DELAY_COUNT 100
+    #define DELAY_COUNT 2000
 #else
     #define DELAY_COUNT 1000000
 #endif
