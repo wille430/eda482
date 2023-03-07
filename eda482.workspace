@@ -20,10 +20,10 @@
   <Project Name="flipflop_irq" Path="flipflop_irq/flipflop_irq.project" Active="No"/>
   <Project Name="flipflop_irq_ack" Path="flipflop_irq_ack/flipflop_irq_ack.project" Active="No"/>
   <Project Name="flipflop_irq_vectored" Path="flipflop_irq_vectored/flipflop_irq_vectored.project" Active="No"/>
-  <Project Name="lab5" Path="lab5/lab5.project" Active="No"/>
+  <Project Name="lab5" Path="lab5/lab5.project" Active="Yes"/>
   <Project Name="usart_polling" Path="usart_polling/usart_polling.project" Active="No"/>
   <Project Name="usart_rx_irq" Path="usart_rx_irq/usart_rx_irq.project" Active="No"/>
-  <Project Name="usart_rxtx_irq" Path="usart_rxtx_irq/usart_rxtx_irq.project" Active="Yes"/>
+  <Project Name="usart_rxtx_irq" Path="usart_rxtx_irq/usart_rxtx_irq.project" Active="No"/>
   <Project Name="usart_buffered" Path="usart_buffered/usart_buffered.project" Active="No"/>
   <BuildMatrix>
     <WorkspaceConfiguration Name="Debug">

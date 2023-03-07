@@ -14,7 +14,7 @@ static CAMERA camera;
 void init_camera()
 {
     create_identity_matrix(worldToCamera);
-    create_identity_matrix(&camera.transform.rotation);
+    create_identity_matrix(camera.transform.rotation);
 }
 
 void init_graphics()
@@ -36,11 +36,63 @@ void move_camera(PVec3 dpos)
     add_vec(&camera.transform.pos, dpos, &camera.transform.pos);
 }
 
+
+void rotate_x(PTRANSFORM t, float deg)
+{
+    Matrix44 R;
+    
+    create_identity_matrix(R);
+    
+    R[1][1] = cos(deg * M_PI / 180);
+    R[1][2] = -sin(deg * M_PI / 180);
+    R[2][1] = sin(deg * M_PI / 180);
+    R[2][2] = cos(deg * M_PI / 180);
+    
+    Matrix44 ret;
+    matmul(R, t->rotation, ret);
+    memcpy(t->rotation, ret, 16);
+}
+
+void rotate_y(PTRANSFORM t, float deg)
+{
+    Matrix44 R;
+    
+    create_identity_matrix(R);
+    
+    float c, s;
+    c = cos(deg * M_PI / 180);
+    s = sin(deg * M_PI / 180);
+    R[0][0] = c;
+    R[0][2] = s;
+    R[2][0] = -s;
+    R[2][2] = c;
+    
+    Matrix44 ret;
+    matmul(R, t->rotation, ret);
+    memcpy(t->rotation, ret, 16);
+}
+
+void rotate_z(PTRANSFORM t, float deg)
+{
+    Matrix44 R;
+    
+    create_identity_matrix(R);
+    
+    R[0][0] = cos(deg * M_PI / 180);
+    R[0][1] = -sin(deg * M_PI / 180);
+    R[1][0] = sin(deg * M_PI / 180);
+    R[1][1] = cos(deg * M_PI / 180);
+    
+    Matrix44 ret;
+    matmul(R, t->rotation, ret);
+    memcpy(t->rotation, ret, 16);
+}
+
 void rotate_camera(PVec3 rot)
 {
-    if (rot->x) rotate_object_x(&camera, rot->x);
-    if (rot->y) rotate_object_y(&camera, rot->y);
-    if (rot->z) rotate_object_z(&camera, rot->z);
+    if (rot->x) rotate_x(&camera.transform, rot->x);
+    if (rot->y) rotate_y(&camera.transform, (float) rot->y);
+    if (rot->z) rotate_z(&camera.transform, rot->z);
 }
 
 void set_camera_position(PVec3 pos)
@@ -63,9 +115,7 @@ void update_world_to_cam_transform_matrix()
 {
     create_identity_matrix(worldToCamera);
     // apply camera rotation
-    Matrix44 res;
-    matmul(worldToCamera, camera.transform.rotation, res);
-    memcpy(worldToCamera, res, 16);
+    memcpy(worldToCamera, camera.transform.rotation, 16);
 
     // if camera is 10 units to the right, then the world should move 10 units to the left
     worldToCamera[0][3] = -camera.transform.pos.x; // x+t
@@ -141,8 +191,8 @@ void draw_object_lines(POBJECT obj)
         multPointMatrix(&translatedVert2, &vertCamera2, worldToCamera);
         
         // points behind the camera should not be displayed
-        if (translatedVert1.z < camera.transform.pos.z && 
-            translatedVert2.z < camera.transform.pos.z) continue;
+        if (vertCamera1.z < camera.transform.pos.z && 
+            vertCamera2.z < camera.transform.pos.z) continue;
 
         // project to screen
         multPointMatrix(&vertCamera1, &projectedVert1, Mproj);
@@ -369,48 +419,15 @@ int pointsSize = 0;
 // rotates x axis
 void rotate_object_x(POBJECT obj, float deg)
 {
-    Matrix44 R;
-    
-    create_identity_matrix(R);
-    
-    R[1][1] = cos(deg * M_PI / 180);
-    R[1][2] = -sin(deg * M_PI / 180);
-    R[2][1] = sin(deg * M_PI / 180);
-    R[2][2] = cos(deg * M_PI / 180);
-    
-    Matrix44 ret;
-    matmul(R, obj->transform.rotation, ret);
-    memcpy(obj->transform.rotation, ret, 16);
+    rotate_x(&obj->transform, deg);
 }
 
 void rotate_object_y(POBJECT obj, float deg)
 {
-    Matrix44 R;
-    
-    create_identity_matrix(R);
-    
-    R[0][0] = cos(deg * M_PI / 180);
-    R[0][2] = sin(deg * M_PI / 180);
-    R[2][0] = -sin(deg * M_PI / 180);
-    R[2][2] = cos(deg * M_PI / 180);
-    
-    Matrix44 ret;
-    matmul(R, obj->transform.rotation, ret);
-    memcpy(obj->transform.rotation, ret, 16);
+    rotate_y(&obj->transform, deg);
 }
 
 void rotate_object_z(POBJECT obj, float deg)
 {
-    Matrix44 R;
-    
-    create_identity_matrix(R);
-    
-    R[0][0] = cos(deg * M_PI / 180);
-    R[0][1] = -sin(deg * M_PI / 180);
-    R[1][0] = sin(deg * M_PI / 180);
-    R[1][1] = cos(deg * M_PI / 180);
-    
-    Matrix44 ret;
-    matmul(R, obj->transform.rotation, ret);
-    memcpy(obj->transform.rotation, ret, 16);
+    rotate_z(&obj->transform, deg);
 }
