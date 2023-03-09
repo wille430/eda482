@@ -19,6 +19,31 @@
   </Plugins>
   <Description/>
   <Dependencies/>
+  <VirtualDirectory Name="src">
+    <File Name="asciidisp.h"/>
+    <File Name="asciidisp.c"/>
+    <File Name="keypad.h"/>
+    <File Name="keypad.c"/>
+    <File Name="registers.h"/>
+    <File Name="delay.h"/>
+    <File Name="utils.c"/>
+    <File Name="graphics.h"/>
+    <File Name="graphics.c"/>
+    <File Name="vertexdata.h"/>
+    <File Name="math.c"/>
+    <File Name="math.h"/>
+    <File Name="geometry.c"/>
+    <File Name="geometry.h"/>
+    <File Name="display.h"/>
+    <File Name="delay.c"/>
+    <File Name="display.c"/>
+    <File Name="startup.c"/>
+  </VirtualDirectory>
+  <VirtualDirectory Name="resources">
+    <File Name="md407-ram.x"/>
+  </VirtualDirectory>
+  <Dependencies Name="Debug"/>
+  <Dependencies Name="Release"/>
   <Settings Type="Executable">
     <GlobalSettings>
       <Compiler Options="" C_Options="" Assembler="">
@@ -32,6 +57,7 @@
     <Configuration Name="Debug" CompilerType="Cross GCC ( arm-none-eabi )" DebuggerType="GNU gdb debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
       <Compiler Options="-g;-O0;-W" C_Options="-g;-O0;-w;-mthumb -march=armv6-m  -mfloat-abi=soft;-std=c99" Assembler="" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" PCHFlags="" PCHFlagsPolicy="0">
         <IncludePath Value="."/>
+        <Preprocessor Value="SIMULATOR"/>
       </Compiler>
       <Linker Options="-T$(ProjectPath)/md407-ram.x;-L$(ARM_V6LIB) -L$(ARM_GCC_V6LIB);-nostdlib;-nostartfiles" Required="yes">
         <Library Value="gcc"/>
@@ -131,27 +157,4 @@ monitor restart</PostConnectCommands>
       </Completion>
     </Configuration>
   </Settings>
-  <VirtualDirectory Name="src">
-    <File Name="keypad.h"/>
-    <File Name="keypad.c"/>
-    <File Name="registers.h"/>
-    <File Name="delay.h"/>
-    <File Name="utils.c"/>
-    <File Name="graphics.h"/>
-    <File Name="graphics.c"/>
-    <File Name="vertexdata.h"/>
-    <File Name="math.c"/>
-    <File Name="math.h"/>
-    <File Name="geometry.c"/>
-    <File Name="geometry.h"/>
-    <File Name="display.h"/>
-    <File Name="delay.c"/>
-    <File Name="display.c"/>
-    <File Name="startup.c"/>
-  </VirtualDirectory>
-  <VirtualDirectory Name="resources">
-    <File Name="md407-ram.x"/>
-  </VirtualDirectory>
-  <Dependencies Name="Debug"/>
-  <Dependencies Name="Release"/>
 </CodeLite_Project>

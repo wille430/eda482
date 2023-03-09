@@ -102,6 +102,11 @@ void set_camera_position(PVec3 pos)
     camera.transform.pos.z = pos->z;
 }
 
+PVec3 get_camera_position(void)
+{
+    return &camera.transform.pos;
+}
+
 void create_translate_matrix(PVec3 pos, Matrix44 out)
 {
     create_identity_matrix(out);
@@ -113,14 +118,34 @@ void create_translate_matrix(PVec3 pos, Matrix44 out)
 
 void update_world_to_cam_transform_matrix()
 {
-    create_identity_matrix(worldToCamera);
+    Matrix44 project_to_cam;
+    create_identity_matrix(project_to_cam);
+    
     // apply camera rotation
-    memcpy(worldToCamera, camera.transform.rotation, 16);
+    Matrix44 move_to_origo;
+    create_identity_matrix(move_to_origo);
+    move_to_origo[0][3] = camera.transform.pos.x;
+    move_to_origo[1][3] = camera.transform.pos.y;
+    move_to_origo[2][3] = camera.transform.pos.z;
+    
+    Matrix44 move_back;
+    create_identity_matrix(move_back);
+    move_back[0][3] = -camera.transform.pos.x;
+    move_back[1][3] = -camera.transform.pos.y;
+    move_back[2][3] = -camera.transform.pos.z;
+    
+    Matrix44 move_and_rot;
+    matmul(move_to_origo, camera.transform.rotation, move_and_rot);
+    
+    Matrix44 cam_rot;
+    matmul(move_back, move_and_rot, cam_rot);
 
     // if camera is 10 units to the right, then the world should move 10 units to the left
-    worldToCamera[0][3] = -camera.transform.pos.x; // x+t
-    worldToCamera[1][3] = -camera.transform.pos.y; // y+t
-    worldToCamera[2][3] = -camera.transform.pos.z; // z+t
+    project_to_cam[0][3] = -camera.transform.pos.x; // x+t
+    project_to_cam[1][3] = -camera.transform.pos.y; // y+t
+    project_to_cam[2][3] = -camera.transform.pos.z; // z+t
+    
+    matmul(project_to_cam, cam_rot, worldToCamera);
 }
 
 int is_valid_point(int x, int y)

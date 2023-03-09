@@ -61,4 +61,12 @@ typedef volatile struct {
     unsigned int   AFRH;
 } GPIO, *PGPIO;
 
+typedef struct
+{
+    unsigned int ctrl;
+    unsigned int load;
+    unsigned int val;
+    unsigned int calib;
+} SYSTICK;
+
 #endif

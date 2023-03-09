@@ -8,6 +8,7 @@
 #include "vertexdata.h"
 #include "delay.h"
 #include "registers.h"
+#include "asciidisp.h"
 
 __attribute__((naked)) __attribute__((section (".start_section")) )
 void startup ( void )
@@ -19,6 +20,7 @@ __asm__ volatile(".L1: B .L1\n");				/* never return */
 }
 
 #define GPIO_D (*((volatile PGPIO) (0x40020C00)))
+#define STK ((volatile STK *) 0xE000E010)
 
 #define CAMERA_SPEED 1
 #define CAMERA_ZOOM_STEP 0.10
@@ -114,16 +116,26 @@ void handle_key_input(void)
                 if (cubesSize) cubePos.x++;
                 place_cube(&cubes[cubesSize++], &cubePos);
                 break;
-            // build up
+            // build forward
             case 0x2:
+                if (cubesSize) cubePos.z++;
+                place_cube(&cubes[cubesSize++], &cubePos);
+                break;
+            // build back
+            case 0x8:
+                if (cubesSize) cubePos.z--;
+                place_cube(&cubes[cubesSize++], &cubePos);
+                break;
+            // build up
+            case 0x7:
                 if (cubesSize) cubePos.y++;
                 place_cube(&cubes[cubesSize++], &cubePos);
                 break;
             // build down
-            case 0x8:
+            case 0xE:
                 if (cubesSize) cubePos.y--;
                 place_cube(&cubes[cubesSize++], &cubePos);
-                break;    
+                break;
         }
     } else if (cameraMode == FREE) {
         Vec3 dpos = {0,0,0};
@@ -223,6 +235,73 @@ void update_camera()
     }
 }
 
+void num_to_str(char * str, int strSize, int n)
+{
+    char sign = 1;
+    if (n < 0) {
+        sign = -1;
+        n *= -1;
+    }
+    
+    for (int i = 0; i < strSize; i++)
+    {
+        str[i] = 0x20;
+    }
+    
+    str[strSize-1] = '\0';
+    int j = 1;
+    for (int i = strSize-2; i >= 1; i--)
+    {
+        str[i] = (n % 10) + '0';
+        n /= 10;
+        j = i;
+        if (n == 0) break;
+    }
+
+    if (sign == -1) {
+        str[j-1] = '-';
+    }
+}
+
+void update_ascii(void)
+{
+    char x[5], y[5], z[5];
+    char *xp = &x[0], *yp = &y[0], *zp = &z[0];
+    num_to_str(xp, 5, (int) get_camera_position()->x);
+    num_to_str(yp, 5, (int) get_camera_position()->y);
+    num_to_str(zp, 5, (int) get_camera_position()->z);
+    
+    ascii_gotoxy(1,1);
+    ascii_write_char('X');
+    ascii_write_char('=');
+    while (*xp) ascii_write_char(*xp++);
+    
+    ascii_write_char(' ');
+    
+    ascii_write_char('Y');
+    ascii_write_char('=');
+    while (*yp) ascii_write_char(*yp++);
+    
+    ascii_write_char(' ');
+    
+    ascii_write_char('Z');
+    ascii_write_char('=');
+    while (*zp) ascii_write_char(*zp++);
+    
+    ascii_gotoxy(1,2);
+    char * mode_str = "CAM MODE = ";
+    while (*mode_str) ascii_write_char(*mode_str++);
+    
+    if (cameraMode == FREE) 
+    {
+        mode_str = "FREE";
+    } else if (cameraMode == FOLLOW)
+    {
+        mode_str = "FOLLOW";
+    }
+    while (*mode_str) ascii_write_char(*mode_str++);
+}
+
 void game_loop(void)
 {
     while (1)
@@ -235,6 +314,8 @@ void game_loop(void)
             draw_object(&cubes[i]);
         }
         
+        update_ascii();
+        
         handle_key_input();
         
         delay_milli(1);
@@ -246,6 +327,7 @@ void main(void)
 {
     init_graphics();
     init_keypad(&GPIO_D);
+    ascii_init();
     // show_rotating_cube();
     // show_rotating_teapot();
     

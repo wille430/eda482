@@ -52,6 +52,8 @@ void rotate_object_z(POBJECT obj, float deg);
 
 void move_camera(PVec3 dpos);
 void set_camera_position(PVec3 pos);
+PVec3 get_camera_position(void);
+
 // rot.x = rotate along x axis, rot.y = rotate along y axis etc.
 void rotate_camera(PVec3 rot);
 

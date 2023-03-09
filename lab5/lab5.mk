@@ -14,7 +14,7 @@ CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=William
-Date                   :=03/07/2023
+Date                   :=03/09/2023
 CodeLitePath           :=/home/william/.codelite
 MakeDirCommand         :=mkdir -p
 LinkerName             :=/usr/share/codelite/tools/gcc-arm/bin/arm-none-eabi-g++
@@ -31,7 +31,7 @@ PreprocessorSwitch     :=-D
 SourceSwitch           :=-c 
 OutputDirectory        :=/home/william/Documents/eda482/build-$(WorkspaceConfiguration)/bin
 OutputFile             :=../build-$(WorkspaceConfiguration)/bin/$(ProjectName)
-Preprocessors          :=
+Preprocessors          :=$(PreprocessorSwitch)SIMULATOR 
 ObjectSwitch           :=-o 
 ArchiveOutputSwitch    := 
 PreprocessOnlySwitch   :=-E
@@ -68,7 +68,7 @@ ARM_M4SFPLIB:=$(CodeLiteDir)/tools/gcc-arm/arm-none-eabi/lib/thumb/v7e-m+fp/soft
 ARM_GCC_M4SFPLIB:=$(CodeLiteDir)/tools/gcc-arm/lib/gcc/arm-none-eabi/9.2.1/thumb/v7e-m+fp/softfp
 ARM_M4HFPLIB:=$(CodeLiteDir)/tools/gcc-arm/arm-none-eabi/lib/thumb/v7e-m+fp/hard
 ARM_GCC_M4HFPLIB:=$(CodeLiteDir)/tools/gcc-arm/lib/gcc/arm-none-eabi/9.2.1/thumb/v7e-m+fp/hard
-Objects0=$(IntermediateDirectory)/delay.c$(ObjectSuffix) $(IntermediateDirectory)/geometry.c$(ObjectSuffix) $(IntermediateDirectory)/display.c$(ObjectSuffix) $(IntermediateDirectory)/keypad.c$(ObjectSuffix) $(IntermediateDirectory)/startup.c$(ObjectSuffix) $(IntermediateDirectory)/utils.c$(ObjectSuffix) $(IntermediateDirectory)/graphics.c$(ObjectSuffix) $(IntermediateDirectory)/math.c$(ObjectSuffix) 
+Objects0=$(IntermediateDirectory)/delay.c$(ObjectSuffix) $(IntermediateDirectory)/asciidisp.c$(ObjectSuffix) $(IntermediateDirectory)/geometry.c$(ObjectSuffix) $(IntermediateDirectory)/display.c$(ObjectSuffix) $(IntermediateDirectory)/keypad.c$(ObjectSuffix) $(IntermediateDirectory)/startup.c$(ObjectSuffix) $(IntermediateDirectory)/utils.c$(ObjectSuffix) $(IntermediateDirectory)/graphics.c$(ObjectSuffix) $(IntermediateDirectory)/math.c$(ObjectSuffix) 
 
 
 
@@ -112,6 +112,14 @@ $(IntermediateDirectory)/delay.c$(DependSuffix): delay.c
 
 $(IntermediateDirectory)/delay.c$(PreprocessSuffix): delay.c
 	$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/delay.c$(PreprocessSuffix) delay.c
+
+$(IntermediateDirectory)/asciidisp.c$(ObjectSuffix): asciidisp.c $(IntermediateDirectory)/asciidisp.c$(DependSuffix)
+	$(CC) $(SourceSwitch) "/home/william/Documents/eda482/lab5/asciidisp.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/asciidisp.c$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/asciidisp.c$(DependSuffix): asciidisp.c
+	@$(CC) $(CFLAGS) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/asciidisp.c$(ObjectSuffix) -MF$(IntermediateDirectory)/asciidisp.c$(DependSuffix) -MM asciidisp.c
+
+$(IntermediateDirectory)/asciidisp.c$(PreprocessSuffix): asciidisp.c
+	$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/asciidisp.c$(PreprocessSuffix) asciidisp.c
 
 $(IntermediateDirectory)/geometry.c$(ObjectSuffix): geometry.c $(IntermediateDirectory)/geometry.c$(DependSuffix)
 	$(CC) $(SourceSwitch) "/home/william/Documents/eda482/lab5/geometry.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/geometry.c$(ObjectSuffix) $(IncludePath)
